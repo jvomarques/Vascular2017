@@ -1,0 +1,108 @@
+<ion-header>
+  <ion-navbar color='navbarColor'>
+    <ion-title>
+      Congresso
+    </ion-title>
+      <ion-buttons end>
+          <button (click)="abrirOpcoes($event)" ion-button icon-only >
+              <ion-icon name="more" ></ion-icon>  
+          </button>
+      </ion-buttons>
+  </ion-navbar>
+</ion-header>
+
+<ion-content class="home" padding>
+<div class="">
+
+  <!-- <div class="menu-superior">
+    <ion-row>
+      <ion-col col-6>
+        <div class="bt-home">
+            <input width="20%" type="image" src="assets/img/bt_home.jpg">
+        </div>
+      </ion-col>
+      <ion-col col-6>
+        <div class="bt-config">
+          <input width="45%" type="image" src="assets/img/bt_config.jpg">
+        </div>
+      </ion-col>
+    </ion-row>
+  </div> -->
+
+<div class="header">
+  <ion-row>
+    <img class="img_logo" src="assets/img/logo_congresso.png">
+  </ion-row>
+</div>
+  
+  <div>
+    <h1>{{usuario}}</h1>
+  </div>
+  <div class="menu">
+    <ion-row>
+      <ion-col col-4>
+        <div class="item-menu1">
+            <input (click)="abrirInfoGerais()" width="80%" type="image" src="assets/img/icone1.png">
+            <font class="legenda">Informações</font>
+        </div>
+      </ion-col>
+      <ion-col col-4>
+        <div class="item-menu2">
+          <input  (click)="abrirPalestrantes()"width="80%" type="image" src="assets/img/icone2.png">
+            <font  class="legenda">Palestrantes</font>
+        </div>
+      </ion-col>
+      <ion-col col-4>
+        <div class="item-menu3">
+          <input (click)="abrirProgramacao()" width="80%" type="image" src="assets/img/icone3.png">
+            <font  class="legenda">Programação</font>
+        </div>
+      </ion-col>
+    </ion-row>
+
+    <ion-row>
+      <ion-col width-33>
+        <div class="item-menu4">
+          <input  (click)="abrirAgenda()" width="80%" type="image" src="assets/img/icone4.png">
+            <font  class="legenda">Minha agenda</font>
+        </div>
+      </ion-col>
+      <ion-col>
+        <div class="item-menu5">
+          <input onclick="window.open('http://vascular2017.com.br/inscricoes/', '_system', 'location=yes'); return false;" width="80%" type="image" src="assets/img/icone5hover.png">
+            <font style="margin-left: 16%; color: #c52f33" class="legenda">Inscrição</font>
+        </div>
+      </ion-col>
+      <ion-col>
+        <div class="item-menu6">
+          <input  width="80%" type="image" src="assets/img/icone6.png">
+            <font style="margin-left: -2%;" class="legenda">Acontece agora</font>
+        </div>
+      </ion-col>
+    </ion-row>
+
+    <ion-row>
+      <ion-col>
+        <div class="item-menu7">
+          <input width="80%" type="image" src="assets/img/icone7.png">
+          <font style="margin-left: 20%;" class="legenda">Feira</font>
+        </div>
+      </ion-col>
+      <ion-col>
+        <div class="item-menu8">
+          <input (click)="abrirTurismo()" width="80%" type="image" src="assets/img/icone8.png">
+          <font style="margin-left: 15%;" class="legenda">Turismo</font>
+        </div>
+      </ion-col>
+      <ion-col>
+        <div class="item-menu9">
+          <input width="80%" type="image" src="assets/img/icone9.png">
+          <font style="margin-left: 15%;" class="legenda">Pesquisa</font>
+        </div>
+      </ion-col>
+    </ion-row>
+  </div>
+
+</div>
+
+</ion-content>

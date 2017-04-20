@@ -1,0 +1,14 @@
+    <ion-header>
+      <ion-navbar color="navbarColor">
+        <ion-title>Programação</ion-title>
+      </ion-navbar>
+    </ion-header>
+
+    <ion-content class="background" padding> 
+      <ion-tabs #myTabs tabsPlacement="top" class="withNavbar" color="navbarColor">
+        <ion-tab tabIcon="school"  tabTitle="Cientifica" [root]="tab1"></ion-tab>
+        <ion-tab tabIcon="person" tabTitle="Social" [root]="tab2"></ion-tab>
+        <ion-tab tabIcon="people" tabTitle="Comissões" [root]="tab3"></ion-tab>
+      </ion-tabs>
+
+    </ion-content>

@@ -1,0 +1,48 @@
+<ion-header>
+  <ion-navbar>
+    <ion-title>Turismo</ion-title>
+  </ion-navbar>
+</ion-header>
+
+<ion-content class="cards-bg">
+
+<div >       
+
+  <ion-card  [virtualScroll]="turismos" >
+
+    <!--<img src="{{turismo.imagem}}"/>-->
+
+    <ion-card-content  *virtualItem="let turismo">
+      <ion-card-title>
+        {{turismo.titulo}}
+      </ion-card-title>
+      <p>
+        {{turismo.descricao}}
+      </p>
+    </ion-card-content>
+
+    <!--<ion-row no-padding>
+      <ion-col>
+        <button ion-button clear small color="danger" icon-left>
+          <ion-icon name='star'></ion-icon>
+          Favorite
+        </button>
+      </ion-col>
+      <ion-col text-center>
+        <button ion-button clear small color="danger" icon-left>
+          <ion-icon name='musical-notes'></ion-icon>
+          Listen
+        </button>
+      </ion-col>
+      <ion-col text-right>
+        <button ion-button clear small color="danger" icon-left>
+          <ion-icon name='share-alt'></ion-icon>
+          Share
+        </button>
+      </ion-col>
+    </ion-row>-->
+
+  </ion-card>
+</div>
+
+</ion-content>

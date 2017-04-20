@@ -1,0 +1,50 @@
+<ion-header>
+
+  <ion-navbar color="navbarColor">
+    <ion-title>Meu perfil</ion-title>
+  </ion-navbar>
+
+</ion-header>
+
+
+<ion-content >
+
+    <div class="usuario-icone-background" style="background-color: #3e4095;">
+      <button class="botao-editar-usuario" ion-button clear icon-only (click)="abrirUsuarioEditar()">
+        <ion-icon name="create" md="md-create" is-active="false"></ion-icon>
+      </button>
+      <img class="usuario-icone" src="assets/img/usuario-icone.png" alt="">
+      <!--<h1 padding style="color:white">{{usuario.nome}}</h1>-->
+    </div>
+
+    <div padding>
+      <ion-list>
+          <ion-item>
+              <ion-avatar item-left>
+              <ion-icon name="person"></ion-icon>
+              </ion-avatar>
+              <h2>{{usuario.nome}}</h2>
+              <p>Nome</p>
+          </ion-item>
+
+          <ion-item>
+              <ion-avatar item-left>
+              <ion-icon name="at"></ion-icon>
+              </ion-avatar>
+              <h2>{{usuario.email}}</h2>
+              <p>E-mail</p>
+          </ion-item>
+
+          <ion-item>
+              <ion-avatar item-left>
+              <ion-icon name="finger-print"></ion-icon>
+              </ion-avatar>
+              <h2>{{usuario.cpf}}</h2>
+              <p>CPF</p>
+          </ion-item>
+          
+      </ion-list>
+    </div>
+
+
+</ion-content>

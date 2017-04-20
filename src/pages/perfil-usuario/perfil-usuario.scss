@@ -1,0 +1,26 @@
+page-perfil-usuario {
+
+    .usuario-imagem {
+        margin-left: 32%;
+        width: 35%;
+        height: 20%;
+    }
+
+    .usuario-icone {
+        width: 40%;
+        margin-top: 19%;
+        margin-left: 28%;
+    }
+    
+    .usuario-icone-background {
+        height: 50%;
+    }
+
+    .botao-editar-usuario {
+        background-color: #3e4095;
+        position: fixed;
+        color: white;
+        //top: 0;
+        right: 0;
+    }
+}

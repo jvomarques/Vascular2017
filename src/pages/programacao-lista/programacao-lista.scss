@@ -1,0 +1,19 @@
+page-programacao-lista {
+    a:active { 
+        a[aria-selected="true"]{
+            
+        }
+    }
+    .platform-ios {
+  ion-tabs.withNavbar {
+    margin-top: 44px;
+  }
+}
+
+
+.platform-android {
+  ion-tabs.withNavbar {
+    margin-top: 50px;
+  }
+}   
+}

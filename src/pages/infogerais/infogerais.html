@@ -1,0 +1,28 @@
+
+<ion-header>
+
+  <ion-navbar color="navbarColor">
+    <ion-title>Informações gerais</ion-title>
+  </ion-navbar>
+
+</ion-header>
+
+<ion-content class="background" padding>
+
+  <ion-list [virtualScroll]="informacoes">
+    <ion-item class="lista" ion-item *virtualItem="let informacao">
+      <ion-thumbnail item-left>
+        <img src={{informacao.imagem}}>
+      </ion-thumbnail>
+      <h2>{{informacao.titulo}}</h2>
+      <p>{{informacao.descricao}}</p>
+      <button ion-button clear item-right (click)="abrirInformacaoCompleta(this.informacao)">Ver</button>
+    </ion-item>
+  </ion-list>
+  <!--<ion-fab bottom right>
+     <button ion-fab color="navbarColor" (click)="abrirInformacaoAdd()">
+        <ion-icon name="add"></ion-icon>
+     </button>
+   </ion-fab>-->
+</ion-content>
+

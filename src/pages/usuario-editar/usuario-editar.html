@@ -1,0 +1,41 @@
+<ion-header>
+
+  <ion-navbar>
+    <ion-title>Editar usuário</ion-title>
+  </ion-navbar>
+
+</ion-header>
+
+
+<ion-content padding>
+
+   <ion-row>
+      <ion-col>
+          <ion-item>
+            <ion-label floating>
+               Nome
+            </ion-label>
+            <ion-input type="text" name="nome" [(ngModel)]="usuario.nome" value="{{usuario.nome}}"></ion-input>
+          </ion-item>
+        </ion-col>
+    </ion-row>
+
+    <ion-row>
+      <ion-col>
+          <ion-item>
+              <ion-label floating>
+                  CPF
+              </ion-label>
+              <ion-input type="text" name="cpf" placeholder="{{usuario.cpf}}" [(ngModel)]="usuario.cpf" value="{{usuario.cpf}}"></ion-input>
+          </ion-item>
+       </ion-col>
+    </ion-row>
+
+    <ion-row>
+        <ion-col>
+            <button ion-button full (click)="editarUsuario()">Editar</button>
+        </ion-col>
+    </ion-row>
+    
+
+</ion-content>

@@ -1,0 +1,22 @@
+<ion-header>
+
+  <ion-navbar color="navbarColor">
+    <ion-title>Palestrantes</ion-title>
+  </ion-navbar>
+
+</ion-header>
+
+
+<ion-content class="background" padding>
+   <ion-list  [virtualScroll]="palestrantes">
+          <ion-item (click)="abrirDescricaoPalestrante(this.palestrante)" class="lista-borda" *virtualItem="let palestrante">
+              <ion-avatar item-left>
+              <img src="{{palestrante.foto}}">
+              </ion-avatar>
+              <h2>{{palestrante.nome}}</h2>
+              <p>{{palestrante.descricao}}</p>
+          </ion-item>
+      </ion-list>
+</ion-content>
+
+

@@ -1,0 +1,21 @@
+page-infogerais {
+.home {
+    background-image: url('../assets/img/background.png');
+    background-repeat: no-repeat;
+    background-size: cover;
+    //background-size: contain;
+}
+
+.lista {
+    //background-color: rgba(0,0,0,0.1);
+    border: 0px solid #fff;
+    border-radius: 5px;
+}
+
+.borda {
+  border: 2px solid #fff;
+  border-radius: 15px;
+  height: 100%;
+}
+
+}

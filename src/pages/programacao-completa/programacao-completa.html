@@ -1,0 +1,18 @@
+<ion-content class="background" padding>
+  
+<!--{{parameter1.titulo}} {{parameter2}}-->
+
+<ion-card class="card-borda">
+  <img src="{{programacao.imagem}}"/>
+  <ion-card-content>
+    <ion-card-title>
+      {{programacao.titulo}}
+      </ion-card-title>
+    <p>
+      {{programacao.conteudo}}
+    </p>
+    
+  </ion-card-content>
+</ion-card>
+<button (click)="addParaAgenda()" ion-button full class="botao-borda" style="background-color: #3a5897;"> Adicionar à minha agenda </button>
+</ion-content>

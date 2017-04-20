@@ -1,0 +1,68 @@
+<ion-header>
+
+  <ion-navbar>
+    <ion-title>Adicionar Informação</ion-title>
+  </ion-navbar>
+
+</ion-header>
+
+
+<ion-content padding>
+  <form>
+    <ion-grid>
+      <ion-row>
+        <ion-col>
+          <ion-item>
+            <ion-label floating>
+              Titulo
+            </ion-label>
+            <ion-input [(ngModel)]="informacao.titulo"  name="titulo"></ion-input>
+          </ion-item>
+        </ion-col>
+      </ion-row>
+
+      <ion-row>
+        <ion-col>
+          <ion-item>
+            <ion-label floating>
+              Descricao
+            </ion-label>
+            <ion-input name="descricao" [(ngModel)]="informacao.descricao"></ion-input>
+          </ion-item>
+        </ion-col>
+      </ion-row>
+
+      <ion-row>
+        <ion-col>
+          <ion-item>
+            <ion-label floating>
+              Conteudo
+            </ion-label>
+            <ion-input name="conteudo" [(ngModel)]="informacao.conteudo"></ion-input>
+          </ion-item>
+        </ion-col>
+      </ion-row>
+
+      <ion-row>
+        <ion-col>
+          <ion-item>
+            <ion-label floating>
+              Imagem (URL)
+            </ion-label>
+            <ion-input name="imagem" [(ngModel)]="informacao.imagem"></ion-input>
+          </ion-item>
+        </ion-col>
+      </ion-row>
+
+      <ion-row>
+        <ion-col>
+          <button ion-button full (click)="salvarInformacao()">
+            Salvar Informação
+          </button>
+        </ion-col>
+      </ion-row>
+
+
+    </ion-grid>
+  </form>
+</ion-content>

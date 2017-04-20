@@ -1,0 +1,85 @@
+
+<ion-header>
+
+  <ion-navbar color='navbarColor'>
+    <ion-title>Registrar-se</ion-title>
+  </ion-navbar>
+
+</ion-header>
+
+
+<ion-content class="background" padding>
+
+      <div class="header">
+        <ion-row>
+          <img class="img_logo" src="assets/img/logo_congresso.png">
+        </ion-row>
+      </div>
+
+      <ion-grid style="margin-top:-6%;">
+        
+        <ion-row>
+          <ion-col>
+            <ion-item class="entrada">
+              <ion-label floating>
+                Nome completo
+              </ion-label>
+              <ion-input name="nome" required [(ngModel)]="usuario.nome"> </ion-input>
+            </ion-item>
+          </ion-col>
+        </ion-row>
+
+        <ion-row>
+          <ion-col>
+            <ion-item class="entrada">
+              <ion-label floating>
+                CPF
+              </ion-label>
+              <ion-input name="cpf" required [(ngModel)]="usuario.cpf"> </ion-input>
+            </ion-item>
+          </ion-col>
+        </ion-row>
+
+        <ion-row>
+          <ion-col>
+            <ion-item class="entrada">
+              <ion-label floating>
+                E-mail
+              </ion-label>
+              <ion-input name="email" required [(ngModel)]="credencial.email" [(ngModel)]="usuario.email"> </ion-input>
+            </ion-item>
+          </ion-col>
+        </ion-row>
+
+        <ion-row>
+          <ion-col>
+            <ion-item class="entrada">
+              <ion-label floating>
+                Senha
+              </ion-label>
+              <ion-input name="senha" required type="password" [(ngModel)]="credencial.senha"> </ion-input>
+            </ion-item>
+          </ion-col>
+        </ion-row>
+
+        <ion-row>
+          <ion-col>
+            <ion-item class="entrada">
+              <ion-label floating>
+                Repita a senha
+              </ion-label>
+              <ion-input name="senha_confirmacao" required type="password" [(ngModel)]="credencial.senha_confirmacao"> </ion-input>
+            </ion-item>
+          </ion-col>
+        </ion-row>
+
+        <ion-row>
+          <ion-col>
+            <button class="botao-borda" style="background-color: #3e4095;" ion-button full (click)="fazRegistro()"> Cadastrar </button>
+          </ion-col>
+        </ion-row>
+
+
+      </ion-grid>
+
+</ion-content>
