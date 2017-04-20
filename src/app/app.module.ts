@@ -1,3 +1,4 @@
+import { AconteceAgoraPage } from './../pages/acontece-agora/acontece-agora';
 import { FeiraProvider } from './../providers/feira-provider';
 import { FeiraDescricaoPage } from './../pages/feira-descricao/feira-descricao';
 import { FeiraPage } from './../pages/feira/feira';
@@ -79,7 +80,8 @@ const firebaseConfig = {
     TurismoPage,
     TurismoDescricaoPage,
     FeiraPage,
-    FeiraDescricaoPage
+    FeiraDescricaoPage,
+    AconteceAgoraPage
   ],
   imports: [
     IonicModule.forRoot(MyApp, {tabsPlacemant:"top"})
@@ -111,7 +113,8 @@ const firebaseConfig = {
     TurismoPage,
     TurismoDescricaoPage,
     FeiraPage,
-    FeiraDescricaoPage
+    FeiraDescricaoPage,
+    AconteceAgoraPage
   ],
   providers: [
     {provide: ErrorHandler, useClass: IonicErrorHandler},

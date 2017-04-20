@@ -1,3 +1,4 @@
+import { AconteceAgoraPage } from './../acontece-agora/acontece-agora';
 import { FeiraPage } from './../feira/feira';
 import { TurismoPage } from './../turismo/turismo';
 import { AgendaPage } from './../agenda/agenda';
@@ -150,6 +151,11 @@ export class HomePage {
   abrirFeira(){
       this.navCtrl.push(FeiraPage);
   }
+
+  abrirAconteceAgora(){
+      this.navCtrl.push(AconteceAgoraPage);
+  }
+
 
   
 }

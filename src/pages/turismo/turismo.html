@@ -6,6 +6,24 @@
 
 <ion-content class="background">
 
+ <!--<ion-slides pager>
+    <ion-slide *ngFor="let turismo of turismos">
+
+      <ion-card style="" class="card-borda">
+        <img src="{{turismo.imagem}}"/>
+        <ion-card-content >
+          <ion-card-title>
+            {{turismo.titulo}}
+          </ion-card-title>
+          <p>
+            {{turismo.conteudo}}
+          </p>
+        </ion-card-content>
+      </ion-card>
+
+    </ion-slide>
+  </ion-slides>-->
+
 <ion-list style="margin-left: 5%;" [virtualScroll]="turismos">       
 
   <ion-card style="margin-left: 0;" class="card-borda" *virtualItem="let turismo">
