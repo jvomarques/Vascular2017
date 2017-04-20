@@ -1,6 +1,5 @@
-import {NavController} from "ionic-angular/navigation/nav-controller";
-import { Component } from '@angular/core';
-import { Platform } from 'ionic-angular';
+import { Component, ViewChild } from '@angular/core';
+import { Platform, LoadingController, NavController } from 'ionic-angular';
 import { StatusBar, Splashscreen } from 'ionic-native';
 
 import { HomePage } from '../pages/home/home';
@@ -13,11 +12,18 @@ import firebase from 'firebase';
   templateUrl: 'app.html'
 })
 export class MyApp {
-  rootPage = LoginPage;
 
-  usuario;
+  @ViewChild(NavController) nav: NavController;
+  rootPage:any;
 
-  constructor(platform: Platform) {
+  constructor(platform: Platform, public loadingCtrl: LoadingController) {
+
+    //Declarações usadasd no método para verificar se existe usuario logado no dispositivo
+    let loader = this.loadingCtrl.create();
+    loader.present();
+    this.listenToUserStatusUpdate(loader);
+    let fireBaseUser = firebase.auth().currentUser;
+    this.rootPage = fireBaseUser ? HomePage : LoginPage;
 
     platform.ready().then(() => {
       // Okay, so the platform is ready and our plugins are available.
@@ -25,7 +31,19 @@ export class MyApp {
       StatusBar.styleDefault();
       Splashscreen.hide();
     });
-
-    //this.usuario = firebase.auth().currentUser.email;
+    
+  }
+  
+  //Método para verificar se existe usuario logado no dispositivo
+  listenToUserStatusUpdate(loader: any) {
+      firebase.auth().onAuthStateChanged((user) => {
+        if(loader)
+          loader.dismiss();
+  
+        if (user) 
+          this.rootPage = HomePage;
+        else 
+          this.rootPage = LoginPage;
+      });
   }
 }

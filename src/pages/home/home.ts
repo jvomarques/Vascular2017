@@ -1,3 +1,4 @@
+import { FeiraPage } from './../feira/feira';
 import { TurismoPage } from './../turismo/turismo';
 import { AgendaPage } from './../agenda/agenda';
 import { ProgramacaoListaPage } from './../programacao-lista/programacao-lista';
@@ -144,6 +145,10 @@ export class HomePage {
 
   abrirTurismo(){
       this.navCtrl.push(TurismoPage);
+  }
+
+  abrirFeira(){
+      this.navCtrl.push(FeiraPage);
   }
 
   

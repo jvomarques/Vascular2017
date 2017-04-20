@@ -1,0 +1,36 @@
+<ion-header>
+  <ion-navbar color="navbarColor">
+    <ion-title>Feira</ion-title>
+  </ion-navbar>
+</ion-header>
+
+<ion-content class="background">
+
+<ion-list style="margin-left: 5%;" [virtualScroll]="feiras">       
+
+  <ion-card style="margin-left: 0;" class="card-borda" *virtualItem="let feira">
+    
+    <img src="{{feira.imagem}}"/>
+    
+    <ion-card-content >
+      <ion-card-title>
+        {{feira.titulo}}
+      </ion-card-title>
+      <p>
+        {{feira.descricao}}
+      </p>
+    </ion-card-content>
+
+    <ion-row no-padding>
+      <ion-col>
+        <button (click)="abrirSaibaMaisFeira(this.feira)" ion-button clear small color="navbarColor" icon-left>
+          <ion-icon name='open'></ion-icon>
+          Saiba mais
+        </button>
+      </ion-col>
+    </ion-row>
+
+  </ion-card>
+</ion-list>
+
+</ion-content>

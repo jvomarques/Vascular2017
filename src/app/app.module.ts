@@ -1,3 +1,7 @@
+import { FeiraProvider } from './../providers/feira-provider';
+import { FeiraDescricaoPage } from './../pages/feira-descricao/feira-descricao';
+import { FeiraPage } from './../pages/feira/feira';
+import { TurismoDescricaoPage } from './../pages/turismo-descricao/turismo-descricao';
 import { TurismoProvider } from './../providers/turismo-provider';
 import { TurismoPage } from './../pages/turismo/turismo';
 import { AgendaComissoesPage } from './../pages/agenda-comissoes/agenda-comissoes';
@@ -72,7 +76,10 @@ const firebaseConfig = {
     AgendaCientificaPage,
     AgendaSocialPage,
     AgendaComissoesPage,
-    TurismoPage
+    TurismoPage,
+    TurismoDescricaoPage,
+    FeiraPage,
+    FeiraDescricaoPage
   ],
   imports: [
     IonicModule.forRoot(MyApp, {tabsPlacemant:"top"})
@@ -101,7 +108,10 @@ const firebaseConfig = {
     AgendaCientificaPage,
     AgendaSocialPage,
     AgendaComissoesPage,
-    TurismoPage
+    TurismoPage,
+    TurismoDescricaoPage,
+    FeiraPage,
+    FeiraDescricaoPage
   ],
   providers: [
     {provide: ErrorHandler, useClass: IonicErrorHandler},
@@ -114,7 +124,8 @@ const firebaseConfig = {
     AgendaProvider,
     ProgramacaoAgendaProvider,
     OneSignal,
-    TurismoProvider
+    TurismoProvider,
+    FeiraProvider
   ]
 })
 export class AppModule {

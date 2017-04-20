@@ -1,3 +1,4 @@
+import { TurismoDescricaoPage } from './../turismo-descricao/turismo-descricao';
 import { Turismo } from './../../model/turismo';
 import { TurismoProvider } from './../../providers/turismo-provider';
 import { Component, NgZone } from '@angular/core';
@@ -28,6 +29,19 @@ export class TurismoPage {
       })
     })
 
+  }
+
+  abrirSaibaMaisTurismo(turismo){
+
+      let turismo_atual:Turismo;
+
+      for(let i = 0; i < this.turismos.length; i++)
+        if(this.turismos[i].idReferencia == turismo.idReferencia)
+          turismo_atual = this.turismos[i];
+
+      this.navCtrl.push(TurismoDescricaoPage, {
+        param1: turismo_atual
+      });
   }
 
 }
