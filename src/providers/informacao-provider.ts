@@ -26,18 +26,18 @@ export class InformacaoProvider {
   }
 
   salvarInformacao(informacao: Informacao){
-    let idRef;
+      let idRef;
 
-    // Update
-    if(informacao.idReferencia != undefined)
-      idRef = informacao.idReferencia;
-    //Insert
-    else
-    {
-        idRef = this.referencia.push().key;
-        informacao.idReferencia = idRef;
-    }
-    this.referencia.child(idRef).update(informacao);
+      // Update
+      if(informacao.idReferencia != undefined)
+        idRef = informacao.idReferencia;
+      //Insert
+      else
+      {
+          idRef = this.referencia.push().key;
+          informacao.idReferencia = idRef;
+      }
+      this.referencia.child(idRef).update(informacao);
   }
 
   deletarInformacao(informacao: Informacao):any{

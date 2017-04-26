@@ -1,22 +1,49 @@
-import { Component } from '@angular/core';
-import { NavController, NavParams } from 'ionic-angular';
+import { AconteceAgoraDescricaoPage } from './../acontece-agora-descricao/acontece-agora-descricao';
+import { AconteceAgora } from './../../model/acontece-agora';
+import { AconteceAgoraProvider } from './../../providers/acontece-agora-provider';
+import { Component, NgZone } from '@angular/core';
+import { NavController, NavParams, ToastController } from 'ionic-angular';
 
-/*
-  Generated class for the AconteceAgora page.
-
-  See http://ionicframework.com/docs/v2/components/#navigation for more info on
-  Ionic pages and navigation.
-*/
 @Component({
   selector: 'page-acontece-agora',
   templateUrl: 'acontece-agora.html'
 })
 export class AconteceAgoraPage {
 
-  constructor(public navCtrl: NavController, public navParams: NavParams) {}
+  acontece_lista:Array<AconteceAgora>;
 
-  ionViewDidLoad() {
-    console.log('ionViewDidLoad AconteceAgoraPage');
+  constructor(public navCtrl: NavController, public navParams: NavParams,
+              public ngZone: NgZone, public aconteceagoraProvider: AconteceAgoraProvider,
+              public toastCtrl: ToastController) {}
+
+  ionViewDidLoad() 
+  {
+
+      this.aconteceagoraProvider.referencia.on('value', (snapshot) => {
+        this.ngZone.run( () => {
+          let innerArray = new Array();
+          snapshot.forEach(elemento => {
+            let el = elemento.val();
+            innerArray.push(el);
+          })
+          this.acontece_lista = innerArray;
+        })
+      })
+
+  }
+
+    abrirAconteceAgoraCompleto(info){
+      
+      let acontece_atual:AconteceAgora;
+
+      for(let i = 0; i < this.acontece_lista.length; i++)
+        if(this.acontece_lista[i].idReferencia == info.idReferencia)
+          acontece_atual = this.acontece_lista[i];
+      
+      this.navCtrl.push(AconteceAgoraDescricaoPage, {
+        param1: acontece_atual
+      });
+      
   }
 
 }

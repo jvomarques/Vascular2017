@@ -28,38 +28,5 @@ export class AgendaPage {
   ionViewDidLoad() {
     
   }
-  
-  // updatePage(event) {
-  //   if (event === 'puppies') {
-  //     this.pet = "puppies";
-  //     console.log("Teste: "+this.pet);
-      
-  //   }
-
-  //   if (event === 'kittens') {
-  //     this.pet = "kittens";
-  //     console.log("Teste: "+this.pet);
-  //   }
-
-  //   if (event === 'ducklings') {
-  //     this.pet = "ducklings";
-  //     console.log("Teste: "+this.pet);
-  //   }
-  // }
-
-  // clickTab1(){
-  //   this.pet = "puppies";
-  //   console.log(this.pet);
-  // }
-
-  // clickTab2(){
-  //   this.pet = "kittens";
-  //   console.log(this.pet);
-  // }
-
-  // clickTab3(){
-  //   this.pet = "ducklings";
-  //   console.log(this.pet);
-  // }
 
 }

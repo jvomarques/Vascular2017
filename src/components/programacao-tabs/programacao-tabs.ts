@@ -1,3 +1,9 @@
+import { ProgramacaoAgenda } from './../../model/programacao-agenda';
+import { ProgramacaoAgendaProvider } from './../../providers/programacao-agenda-provider';
+import { Agenda } from './../../model/agenda';
+import { AgendaProvider } from './../../providers/agenda-provider';
+import { UsuarioProvider } from './../../providers/usuario-provider';
+import { Usuario } from './../../model/usuario';
 import { ProgramacaoCompletaPage } from './../../pages/programacao-completa/programacao-completa';
 import { ProgramacaoProvider } from './../../providers/programacao-provider';
 import { Programacao } from './../../model/programacao';
@@ -39,22 +45,36 @@ import firebase from 'firebase';
 })
 export class ProgramacaoTabsPage1 {
 
-  programacoes:Array<Programacao>;
   programacao_cientifica:Array<Programacao>;
   programacao_social:Array<Programacao>;
   programacao_comissoes:Array<Programacao>;
   programacao_por_data = [];
 
+  usuarios:Array<Usuario>;
+  agendas:Array<Agenda>;
+  programacoes:Array<Programacao>;
+  programacoes_agenda:Array<ProgramacaoAgenda>;
+    
+
   constructor(public navCtrl: NavController, public navParams: NavParams,
-              public programacaoProvider: ProgramacaoProvider, public ngZone: NgZone) {
-                 
+              public programacaoProvider: ProgramacaoProvider, public ngZone: NgZone,
+              public usuarioProvider: UsuarioProvider, public agendaProvider: AgendaProvider,
+              public programacao_agendaProvider: ProgramacaoAgendaProvider) {
+
+                 this.programacao_cientifica = new Array<Programacao>();
+                 this.programacao_social = new Array<Programacao>();
+                 this.programacao_comissoes = new Array<Programacao>();
+
+                 this.usuarios = new Array<Usuario>();
+                 this.agendas = new Array<Agenda>();
+                 this.programacoes = new Array<Programacao>();
+                 this.programacoes_agenda = new Array<ProgramacaoAgenda>();
+
               }
               
   inicializar() {
 
   }
-
-  
 
   removeItem(array, item){
       for(var i in array){
@@ -69,15 +89,49 @@ export class ProgramacaoTabsPage1 {
       
       this.programacaoProvider.referencia.on('value', (snapshot) => {
       this.ngZone.run( () => {
-        let innerArray = new Array();
-        snapshot.forEach(elemento => {
-          let el = elemento.val();
-          if(el.tipo == "Cientifica")
-            innerArray.push(el);
+            let innerArray = new Array();
+            snapshot.forEach(elemento => {
+              let el = elemento.val();
+              if(el.tipo == "Cientifica")
+                innerArray.push(el);
+            })
+            this.programacoes = innerArray;
+          })
         })
-        this.programacoes = innerArray;
+
+      this.usuarioProvider.referencia.on('value', (snapshot) => {
+      this.ngZone.run( () => {
+          let innerArray = new Array();
+          snapshot.forEach(elemento => {
+            let el = elemento.val();
+            innerArray.push(el);
+          })
+          this.usuarios = innerArray;
+        })
       })
-    })
+
+      this.agendaProvider.referencia.on('value', (snapshot) => {
+      this.ngZone.run( () => {
+          let innerArray = new Array();
+          snapshot.forEach(elemento => {
+            let el = elemento.val();
+            innerArray.push(el);
+          })
+          this.agendas = innerArray;
+        })
+      })
+
+      //Puxando todos os dados da tabela programacao_agenda
+      this.programacao_agendaProvider.referencia.on('value', (snapshot) => {
+        this.ngZone.run( () => {
+          let innerArray = new Array();
+          snapshot.forEach(elemento => {
+            let el = elemento.val();
+            innerArray.push(el);
+          })
+          this.programacoes_agenda = innerArray;
+        })
+      })
 
     let aux = new Array();
     for(let i = 0; i < this.programacoes.length; i++)
@@ -121,7 +175,8 @@ export class ProgramacaoTabsPage1 {
 
   abrirProgramacao(info){
       this.navCtrl.push(ProgramacaoCompletaPage, {
-        param1: info
+        programacao: info, usuarios: this.usuarios, agendas: this.agendas, programacoes: this.programacao_cientifica,
+        programacoes_agenda: this.programacoes_agenda
       });
   }
 
@@ -156,30 +211,78 @@ export class ProgramacaoTabsPage1 {
 })
 export class ProgramacaoTabsPage2 {
  
-  constructor(public navCtrl: NavController, public navParams: NavParams,
-              public programacaoProvider: ProgramacaoProvider, public ngZone: NgZone) {
-                 
-              }
-
-  programacoes:Array<Programacao>;
   programacao_cientifica:Array<Programacao>;
   programacao_social:Array<Programacao>;
   programacao_comissoes:Array<Programacao>;
-  programacao_por_data = [[]];
+  programacao_por_data = [];
 
+  usuarios:Array<Usuario>;
+  agendas:Array<Agenda>;
+  programacoes:Array<Programacao>;
+  programacoes_agenda:Array<ProgramacaoAgenda>;
+
+  constructor(public navCtrl: NavController, public navParams: NavParams,
+              public programacaoProvider: ProgramacaoProvider, public ngZone: NgZone,
+              public usuarioProvider: UsuarioProvider, public agendaProvider: AgendaProvider,
+              public programacao_agendaProvider: ProgramacaoAgendaProvider) {
+
+                 this.programacao_cientifica = new Array<Programacao>();
+                 this.programacao_social = new Array<Programacao>();
+                 this.programacao_comissoes = new Array<Programacao>();
+
+                 this.usuarios = new Array<Usuario>();
+                 this.agendas = new Array<Agenda>();
+                 this.programacoes = new Array<Programacao>();
+                 this.programacoes_agenda = new Array<ProgramacaoAgenda>();
+              }
 
   ionViewDidLoad() {
+
       this.programacaoProvider.referencia.on('value', (snapshot) => {
       this.ngZone.run( () => {
-        let innerArray = new Array();
-        snapshot.forEach(elemento => {
-          let el = elemento.val();
-          if(el.tipo == "Social")
-            innerArray.push(el);
+            let innerArray = new Array();
+            snapshot.forEach(elemento => {
+              let el = elemento.val();
+              if(el.tipo == "Social")
+                innerArray.push(el);
+            })
+            this.programacoes = innerArray;
+          })
         })
-        this.programacoes = innerArray;
+
+      this.usuarioProvider.referencia.on('value', (snapshot) => {
+      this.ngZone.run( () => {
+          let innerArray = new Array();
+          snapshot.forEach(elemento => {
+            let el = elemento.val();
+            innerArray.push(el);
+          })
+          this.usuarios = innerArray;
+        })
       })
-    })
+
+      this.agendaProvider.referencia.on('value', (snapshot) => {
+      this.ngZone.run( () => {
+          let innerArray = new Array();
+          snapshot.forEach(elemento => {
+            let el = elemento.val();
+            innerArray.push(el);
+          })
+          this.agendas = innerArray;
+        })
+      })
+
+      //Puxando todos os dados da tabela programacao_agenda
+      this.programacao_agendaProvider.referencia.on('value', (snapshot) => {
+        this.ngZone.run( () => {
+          let innerArray = new Array();
+          snapshot.forEach(elemento => {
+            let el = elemento.val();
+            innerArray.push(el);
+          })
+          this.programacoes_agenda = innerArray;
+        })
+      })
 
     let aux = new Array();
     for(let i = 0; i < this.programacoes.length; i++)
@@ -191,7 +294,8 @@ export class ProgramacaoTabsPage2 {
 
   abrirProgramacao(info){
       this.navCtrl.push(ProgramacaoCompletaPage, {
-        param1: info
+        programacao: info, usuarios: this.usuarios, agendas: this.agendas, programacoes: this.programacao_social,
+        programacoes_agenda: this.programacoes_agenda
       });
   }
 
@@ -225,30 +329,80 @@ export class ProgramacaoTabsPage2 {
   `
 })
 export class ProgramacaoTabsPage3 {
-constructor(public navCtrl: NavController, public navParams: NavParams,
-              public programacaoProvider: ProgramacaoProvider, public ngZone: NgZone) {
-                 
-              }
 
-  programacoes:Array<Programacao>;
   programacao_cientifica:Array<Programacao>;
   programacao_social:Array<Programacao>;
   programacao_comissoes:Array<Programacao>;
-  programacao_por_data = [[]];
+  programacao_por_data = [];
+
+  usuarios:Array<Usuario>;
+  agendas:Array<Agenda>;
+  programacoes:Array<Programacao>;
+  programacoes_agenda:Array<ProgramacaoAgenda>;
+
+  constructor(public navCtrl: NavController, public navParams: NavParams,
+              public programacaoProvider: ProgramacaoProvider, public ngZone: NgZone,
+              public usuarioProvider: UsuarioProvider, public agendaProvider: AgendaProvider,
+              public programacao_agendaProvider: ProgramacaoAgendaProvider) {
+
+                 this.programacao_cientifica = new Array<Programacao>();
+                 this.programacao_social = new Array<Programacao>();
+                 this.programacao_comissoes = new Array<Programacao>();
+
+                 this.usuarios = new Array<Usuario>();
+                 this.agendas = new Array<Agenda>();
+                 this.programacoes = new Array<Programacao>();
+                 this.programacoes_agenda = new Array<ProgramacaoAgenda>();
+              }
 
 
   ionViewDidLoad() {
+
       this.programacaoProvider.referencia.on('value', (snapshot) => {
       this.ngZone.run( () => {
-        let innerArray = new Array();
-        snapshot.forEach(elemento => {
-          let el = elemento.val();
-          if(el.tipo == "Comissões")
-            innerArray.push(el);
+            let innerArray = new Array();
+            snapshot.forEach(elemento => {
+              let el = elemento.val();
+              if(el.tipo == "Comissões")
+                innerArray.push(el);
+            })
+            this.programacoes = innerArray;
+          })
         })
-        this.programacoes = innerArray;
+
+      this.usuarioProvider.referencia.on('value', (snapshot) => {
+      this.ngZone.run( () => {
+          let innerArray = new Array();
+          snapshot.forEach(elemento => {
+            let el = elemento.val();
+            innerArray.push(el);
+          })
+          this.usuarios = innerArray;
+        })
       })
-    })
+
+      this.agendaProvider.referencia.on('value', (snapshot) => {
+      this.ngZone.run( () => {
+          let innerArray = new Array();
+          snapshot.forEach(elemento => {
+            let el = elemento.val();
+            innerArray.push(el);
+          })
+          this.agendas = innerArray;
+        })
+      })
+
+      //Puxando todos os dados da tabela programacao_agenda
+      this.programacao_agendaProvider.referencia.on('value', (snapshot) => {
+        this.ngZone.run( () => {
+          let innerArray = new Array();
+          snapshot.forEach(elemento => {
+            let el = elemento.val();
+            innerArray.push(el);
+          })
+          this.programacoes_agenda = innerArray;
+        })
+      })
 
     let aux = new Array();
     for(let i = 0; i < this.programacoes.length; i++)
@@ -260,7 +414,8 @@ constructor(public navCtrl: NavController, public navParams: NavParams,
 
   abrirProgramacao(info){
       this.navCtrl.push(ProgramacaoCompletaPage, {
-        param1: info
+        programacao: info, usuarios: this.usuarios, agendas: this.agendas, programacoes: this.programacao_comissoes,
+        programacoes_agenda: this.programacoes_agenda
       });
   }
 

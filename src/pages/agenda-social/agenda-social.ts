@@ -40,7 +40,7 @@ export class AgendaSocialPage {
               }
 
   ionViewDidLoad() {
-    
+        
         //RETORNANDO LISTA DE TODAS AS AGENDAS
         this.agendaProvider.referencia.on('value', (snapshot) => {
           this.ngZone.run( () => {

@@ -35,6 +35,7 @@ export class PopoverPage {
   usuario_email_atual = firebase.auth().currentUser.email;
   usuario_atual:Usuario;
   
+  
   constructor(public navCtrl: NavController, public alertCtrl: AlertController,
               public ngZone: NgZone,  public usuarioProvider: UsuarioProvider,
               public popoverCtrl: PopoverController,  public loginProvider: LoginProvider) {
@@ -79,7 +80,6 @@ export class PopoverPage {
   }
 
   logoutUsuario() {
-
       let alert = this.alertCtrl.create({
       title: 'Sair',
       message: 'Deseja realmente sair da aplicação?',

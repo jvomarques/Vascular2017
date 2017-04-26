@@ -37,6 +37,11 @@ export class AgendaCientificaPage {
               public programacaoProvider: ProgramacaoProvider) {
                 this.programacoes_por_agenda = new Array<Programacao>();
                 this.programacao_agenda_por_usuario = new Array<ProgramacaoAgenda>();
+                this.usuarios = new Array<Usuario>();
+                this.programacoes = new Array<Programacao>();
+                this.agendas = new Array<Agenda>();
+                this.programacao_agenda = new Array<ProgramacaoAgenda>()
+                
               }
 
   ionViewDidLoad() {
