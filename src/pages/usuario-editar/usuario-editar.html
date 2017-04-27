@@ -1,17 +1,23 @@
 <ion-header>
 
-  <ion-navbar>
+  <ion-navbar color="navbarColor">
     <ion-title>Editar usuário</ion-title>
   </ion-navbar>
 
 </ion-header>
 
 
-<ion-content padding>
+<ion-content class="background" padding>
 
+  <div class="header">
+    <ion-row>
+      <img class="img_logo" src="assets/img/logo_congresso.png">
+    </ion-row>
+  </div>
+  
    <ion-row>
       <ion-col>
-          <ion-item>
+          <ion-item class="entrada">
             <ion-label floating>
                Nome
             </ion-label>
@@ -22,7 +28,7 @@
 
     <ion-row>
       <ion-col>
-          <ion-item>
+          <ion-item class="entrada">
               <ion-label floating>
                   CPF
               </ion-label>
@@ -33,7 +39,7 @@
 
     <ion-row>
         <ion-col>
-            <button ion-button full (click)="editarUsuario()">Editar</button>
+            <button ion-button full class="botao-borda" style="background-color: #3e4095;" (click)="editarUsuario()">Editar</button>
         </ion-col>
     </ion-row>
     

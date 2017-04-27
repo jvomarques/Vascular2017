@@ -27053,3 +27053,17 @@ page-turismo p {
 page-turismo p b {
   color: #000000;
 }
+
+page-usuario-editar .entrada {
+  background-color: rgba(0, 0, 0, 0.1);
+  border: 0px solid #fff;
+  border-radius: 10px;
+}
+
+page-usuario-editar .img_logo {
+  margin-bottom: 10%;
+  margin-top: 5%;
+  margin-left: 15%;
+  width: 70%;
+  height: 70%;
+}

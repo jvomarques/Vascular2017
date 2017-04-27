@@ -36,7 +36,11 @@ export class ProgramacaoCompletaPage {
   programacoes_agenda:Array<ProgramacaoAgenda>;
   programacao_agenda_por_usuario:Array<ProgramacaoAgenda>;
   programacao_agenda: ProgramacaoAgenda;
-  
+
+  //USADO PARA DIFERENCIAR O BOTÃO DE ADICIONAR OU REMOVER PROGRAMACAO
+  estouNaAgenda:boolean;
+  textoBotaoAdd_Delete:string;
+
   constructor(public navCtrl: NavController, public navParams: NavParams,
               public agendaProvider: AgendaProvider, public programacao_agendaProvider: ProgramacaoAgendaProvider,
               public ngZone: NgZone, public usuarioProvider: UsuarioProvider,
@@ -46,6 +50,7 @@ export class ProgramacaoCompletaPage {
               this.agendas = navParams.get('agendas');
               this.programacoes_agenda = navParams.get('programacoes_agenda');
               this.programacoes = navParams.get('programacoes');
+              this.estouNaAgenda = navParams.get('estouNaAgenda');
 
               this.programacao_agenda = new ProgramacaoAgenda();
 
@@ -55,12 +60,10 @@ export class ProgramacaoCompletaPage {
 
   ionViewDidLoad() {
 
-      console.log("tamanho programacoes_agenda2: "+this.programacoes_agenda.length);
-      console.log("Minhas programacoes na minha agenda: ");
-      for(let j = 0; j < this.programacoes_agenda.length; j++) 
-      {
-        console.log("Indice: "+ j + " "+ this.programacoes_agenda[j].id_programacao);
-      }
+      if(this.estouNaAgenda)
+          this.textoBotaoAdd_Delete = "Remover da minha agenda";
+      else
+          this.textoBotaoAdd_Delete = "Adicionar à minha agenda";
 
       //Pegando o usuario com email igual ao email da autenticação
       for(let i = 0; i < this.usuarios.length; i++)

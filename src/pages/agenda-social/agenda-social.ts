@@ -28,8 +28,10 @@ export class AgendaSocialPage {
   usuario_email_atual = firebase.auth().currentUser.email;
   usuario_atual:Usuario;
 
-  programacao_agenda:Array<ProgramacaoAgenda>;
+  programacoes_agenda:Array<ProgramacaoAgenda>;
   programacao_agenda_por_usuario:Array<ProgramacaoAgenda>;
+
+  estouNaAgenda:boolean;
 
   constructor(public navCtrl: NavController, public navParams: NavParams,
               public agendaProvider: AgendaProvider, public programacao_agendaProvider: ProgramacaoAgendaProvider,
@@ -37,10 +39,13 @@ export class AgendaSocialPage {
               public programacaoProvider: ProgramacaoProvider) {
                 this.programacoes_por_agenda = new Array<Programacao>();
                 this.programacao_agenda_por_usuario = new Array<ProgramacaoAgenda>();
+
+                this.estouNaAgenda = true;
               }
 
   ionViewDidLoad() {
         
+        this.estouNaAgenda = true;
         //RETORNANDO LISTA DE TODAS AS AGENDAS
         this.agendaProvider.referencia.on('value', (snapshot) => {
           this.ngZone.run( () => {
@@ -86,7 +91,7 @@ export class AgendaSocialPage {
             let el = elemento.val();
             innerArray.push(el);
           })
-          this.programacao_agenda = innerArray;
+          this.programacoes_agenda = innerArray;
         })
       })
 
@@ -106,9 +111,9 @@ export class AgendaSocialPage {
       }
 
       //Pegando os valores da tabela programacao_agenda de acordo com a agenda atual
-      for(let i = 0; i < this.programacao_agenda.length; i++)
-        if(this.programacao_agenda[i].id_agenda == this.agenda_atual.idReferencia)
-          this.programacao_agenda_por_usuario.push(this.programacao_agenda[i]);
+      for(let i = 0; i < this.programacoes_agenda.length; i++)
+        if(this.programacoes_agenda[i].id_agenda == this.agenda_atual.idReferencia)
+          this.programacao_agenda_por_usuario.push(this.programacoes_agenda[i]);
 
           
       for(let i = 0; i < this.programacoes.length; i++)
@@ -123,7 +128,8 @@ export class AgendaSocialPage {
 
   abrirProgramacao(info){
       this.navCtrl.push(ProgramacaoCompletaPage, {
-        param1: info
+        programacao: info, usuarios: this.usuarios, agendas: this.agendas, programacoes: this.programacoes,
+        programacoes_agenda: this.programacoes_agenda, estouNaAgenda: this.estouNaAgenda
       });
   }
 
