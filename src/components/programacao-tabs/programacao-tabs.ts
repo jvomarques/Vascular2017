@@ -175,7 +175,7 @@ export class ProgramacaoTabsPage1 {
 
   abrirProgramacao(info){
       this.navCtrl.push(ProgramacaoCompletaPage, {
-        programacao: info, usuarios: this.usuarios, agendas: this.agendas, programacoes: this.programacao_cientifica,
+        programacao: info, usuarios: this.usuarios, agendas: this.agendas, programacoes: this.programacoes,
         programacoes_agenda: this.programacoes_agenda
       });
   }

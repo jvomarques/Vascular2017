@@ -1,3 +1,5 @@
+import { ProgramacaoCompletaWithNavBarPage } from './../pages/programacao-completa-with-nav-bar/programacao-completa-with-nav-bar';
+import { PalestranteProgramacaoProvider } from './../providers/palestrante-programacao-provider';
 import { AconteceAgoraProvider } from './../providers/acontece-agora-provider';
 import { AconteceAgoraDescricaoPage } from './../pages/acontece-agora-descricao/acontece-agora-descricao';
 import { AconteceAgoraPage } from './../pages/acontece-agora/acontece-agora';
@@ -84,7 +86,8 @@ const firebaseConfig = {
     FeiraPage,
     FeiraDescricaoPage,
     AconteceAgoraPage,
-    AconteceAgoraDescricaoPage
+    AconteceAgoraDescricaoPage,
+    ProgramacaoCompletaWithNavBarPage
   ],
   imports: [
     IonicModule.forRoot(MyApp, {tabsPlacemant:"top"})
@@ -118,7 +121,8 @@ const firebaseConfig = {
     FeiraPage,
     FeiraDescricaoPage,
     AconteceAgoraPage,
-    AconteceAgoraDescricaoPage
+    AconteceAgoraDescricaoPage,
+    ProgramacaoCompletaWithNavBarPage
   ],
   providers: [
     {provide: ErrorHandler, useClass: IonicErrorHandler},
@@ -133,7 +137,8 @@ const firebaseConfig = {
     OneSignal,
     TurismoProvider,
     FeiraProvider,
-    AconteceAgoraProvider
+    AconteceAgoraProvider,
+    PalestranteProgramacaoProvider
   ]
 })
 export class AppModule {

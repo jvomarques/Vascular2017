@@ -26975,6 +26975,14 @@ page-login .entrada {
   border-radius: 10px;
 }
 
+page-palestrante-descricao ion-note {
+  font-size: 12px;
+  -webkit-align-self: flex-start;
+  -ms-flex-item-align: start;
+  align-self: flex-start;
+  margin-top: 14px;
+}
+
 page-perfil-usuario .usuario-imagem {
   margin-left: 32%;
   width: 35%;

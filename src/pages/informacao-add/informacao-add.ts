@@ -31,6 +31,8 @@ export class InformacaoAddPage {
     if(!this.informacao) {
       this.informacao = new Informacao();
     }
+
+
   }
 
   salvarInformacao(){

@@ -10,11 +10,15 @@ import {InformacaoAddPage} from '../informacao-add/informacao-add'
 
 import {InformacaoItemComponent} from '../../components/informacao-item/informacao-item';
 
+import firebase from 'firebase';
+
 @Component({
   selector: 'page-infogerais',
   templateUrl: 'infogerais.html'
 })
 export class InfomacoesListaPage {
+
+  storageRef;
 
   informacoes:Array<Informacao>;
   id_informacao:any;
@@ -40,6 +44,11 @@ export class InfomacoesListaPage {
       }).present();
     })
     */
+
+     this.storageRef = firebase.storage().ref().child('imgs/download.jpg');
+                    this.storageRef.getDownloadURL().then(url =>
+                        console.log(url)
+                    );
 
     this.informacaoProvider.referencia.on('value', (snapshot) => {
       this.ngZone.run( () => {
