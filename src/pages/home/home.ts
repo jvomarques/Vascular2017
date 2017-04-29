@@ -1,3 +1,4 @@
+import { SobrePage } from './../sobre/sobre';
 import { AconteceAgoraPage } from './../acontece-agora/acontece-agora';
 import { FeiraPage } from './../feira/feira';
 import { TurismoPage } from './../turismo/turismo';
@@ -156,6 +157,8 @@ export class HomePage {
       this.navCtrl.push(AconteceAgoraPage);
   }
 
+  abrirSobre(){
+      this.navCtrl.push(SobrePage);
+  }
 
-  
 }

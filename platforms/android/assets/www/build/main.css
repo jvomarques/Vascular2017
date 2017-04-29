@@ -26797,6 +26797,10 @@ ion-navbar.toolbar {
   background-size: cover;
 }
 
+.img-propaganda {
+  width: 120%;
+}
+
 .botao-borda {
   border: 0px solid #fff;
   border-radius: 5px;
@@ -26818,6 +26822,30 @@ ion-navbar.toolbar {
 }
 
 programacao-tabs .list-avatar-page ion-note {
+  font-size: 12px;
+  -webkit-align-self: flex-start;
+  -ms-flex-item-align: start;
+  align-self: flex-start;
+  margin-top: 14px;
+}
+
+page-agenda-cientifica .list-avatar-page ion-note {
+  font-size: 12px;
+  -webkit-align-self: flex-start;
+  -ms-flex-item-align: start;
+  align-self: flex-start;
+  margin-top: 14px;
+}
+
+page-agenda-comissoes .list-avatar-page ion-note {
+  font-size: 12px;
+  -webkit-align-self: flex-start;
+  -ms-flex-item-align: start;
+  align-self: flex-start;
+  margin-top: 14px;
+}
+
+page-agenda-social .list-avatar-page ion-note {
   font-size: 12px;
   -webkit-align-self: flex-start;
   -ms-flex-item-align: start;
@@ -26947,6 +26975,14 @@ page-login .entrada {
   border-radius: 10px;
 }
 
+page-palestrante-descricao ion-note {
+  font-size: 12px;
+  -webkit-align-self: flex-start;
+  -ms-flex-item-align: start;
+  align-self: flex-start;
+  margin-top: 14px;
+}
+
 page-perfil-usuario .usuario-imagem {
   margin-left: 32%;
   width: 35%;
@@ -27024,4 +27060,18 @@ page-turismo p {
 
 page-turismo p b {
   color: #000000;
+}
+
+page-usuario-editar .entrada {
+  background-color: rgba(0, 0, 0, 0.1);
+  border: 0px solid #fff;
+  border-radius: 10px;
+}
+
+page-usuario-editar .img_logo {
+  margin-bottom: 10%;
+  margin-top: 5%;
+  margin-left: 15%;
+  width: 70%;
+  height: 70%;
 }

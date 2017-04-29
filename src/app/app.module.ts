@@ -1,3 +1,4 @@
+import { SobrePage } from './../pages/sobre/sobre';
 import { ProgramacaoCompletaWithNavBarPage } from './../pages/programacao-completa-with-nav-bar/programacao-completa-with-nav-bar';
 import { PalestranteProgramacaoProvider } from './../providers/palestrante-programacao-provider';
 import { AconteceAgoraProvider } from './../providers/acontece-agora-provider';
@@ -87,7 +88,8 @@ const firebaseConfig = {
     FeiraDescricaoPage,
     AconteceAgoraPage,
     AconteceAgoraDescricaoPage,
-    ProgramacaoCompletaWithNavBarPage
+    ProgramacaoCompletaWithNavBarPage,
+    SobrePage
   ],
   imports: [
     IonicModule.forRoot(MyApp, {tabsPlacemant:"top"})
@@ -122,7 +124,8 @@ const firebaseConfig = {
     FeiraDescricaoPage,
     AconteceAgoraPage,
     AconteceAgoraDescricaoPage,
-    ProgramacaoCompletaWithNavBarPage
+    ProgramacaoCompletaWithNavBarPage,
+    SobrePage
   ],
   providers: [
     {provide: ErrorHandler, useClass: IonicErrorHandler},
