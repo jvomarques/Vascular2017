@@ -27028,6 +27028,12 @@ page-registrar .entrada {
   border-radius: 10px;
 }
 
+page-sobre-app .img_logo {
+  width: 80%;
+  margin-left: 10%;
+  margin-top: 20%;
+}
+
 page-turismo .toolbar-background {
   background: #fff;
   border-color: transparent;

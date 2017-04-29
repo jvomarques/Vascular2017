@@ -1,3 +1,4 @@
+import { SobreAppPage } from './../sobre-app/sobre-app';
 import { SobrePage } from './../sobre/sobre';
 import { AconteceAgoraPage } from './../acontece-agora/acontece-agora';
 import { FeiraPage } from './../feira/feira';
@@ -24,7 +25,7 @@ import firebase from "firebase";
   `
       <ion-list>
         <button ion-item (click)="abrirPerfilUsuario()">Meu perfil</button>
-        <button ion-item (click)="abrirPerfilUsuario()">Sobre</button>
+        <button ion-item (click)="abrirSobreApp()">Sobre</button>
         <button ion-item (click)="logoutUsuario()">Sair</button>
       </ion-list>
     `
@@ -78,6 +79,10 @@ export class PopoverPage {
     this.navCtrl.push(PerfilUsuarioPage, {
       param1: this.usuario_atual
     });
+  }
+
+  abrirSobreApp(){
+    this.navCtrl.push(SobreAppPage);
   }
 
   logoutUsuario() {
