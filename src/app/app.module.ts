@@ -162,17 +162,17 @@ export class AppModule {
   }
 
     initializeApp() {
-    // this._platform.ready().then(() => {
-    //   this._OneSignal.startInit("76676dc5-7ed7-403c-bd31-f0bc148e6505", "757000610628");
-    //   this._OneSignal.inFocusDisplaying(this._OneSignal.OSInFocusDisplayOption.Notification);
-    //   this._OneSignal.setSubscription(true);
-    //   this._OneSignal.handleNotificationReceived().subscribe(() => {
-    //     // handle received here how you wish.
-    //   });
-    //   this._OneSignal.handleNotificationOpened().subscribe(() => {
-    //     // handle opened here how you wish.
-    //   });
-    //   this._OneSignal.endInit();        
-    // })    
+    this._platform.ready().then(() => {
+      this._OneSignal.startInit("76676dc5-7ed7-403c-bd31-f0bc148e6505", "757000610628");
+      this._OneSignal.inFocusDisplaying(this._OneSignal.OSInFocusDisplayOption.Notification);
+      this._OneSignal.setSubscription(true);
+      this._OneSignal.handleNotificationReceived().subscribe(() => {
+        // handle received here how you wish.
+      });
+      this._OneSignal.handleNotificationOpened().subscribe(() => {
+        // handle opened here how you wish.
+      });
+      this._OneSignal.endInit();        
+    })    
   }
 }
