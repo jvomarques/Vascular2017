@@ -124,12 +124,13 @@ export class LoginProvider {
         .then(result => this.callbackSucessoRegistro(result))
         .catch(error => this.callbackFalhaoRegistro(error));
 
+        console.log("Usuario: " + usuario.nome);
         //CADASTRO DE USUARIO NA TABELA USUARIO
         let idRef;
         idRef = this.referencia.push().key;
         usuario.idReferencia = idRef;
         this.referencia.child(idRef).update(usuario);
-        
+        console.log("registrou");
         return true;
         
       }

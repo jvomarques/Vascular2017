@@ -41,7 +41,10 @@ export class PopoverPage {
   constructor(public navCtrl: NavController, public alertCtrl: AlertController,
               public ngZone: NgZone,  public usuarioProvider: UsuarioProvider,
               public popoverCtrl: PopoverController,  public loginProvider: LoginProvider) {
-
+                this.usuarios = new Array<Usuario>();
+                this.usuario_atual = new Usuario();
+                this.usuario_email_atual = firebase.auth().currentUser.email;
+                
   }
 
   ionViewDidLoad(){
@@ -70,11 +73,23 @@ export class PopoverPage {
 
   abrirPerfilUsuario(){
 
+    for(let i = 0; i < this.usuarios.length; i++)
+      console.log("Usuarios (email): " + this.usuarios[i].email);
+
+    console.log("Tamanho: " + this.usuarios.length);
+    
     //Pegando o usuario com email igual ao email da autenticação
     for(let i = 0; i < this.usuarios.length; i++)
       if(this.usuarios[i].email == this.usuario_email_atual)
+      {
+        console.log("Entrou");
         this.usuario_atual = this.usuarios[i];
+        break;
+      }
 
+      console.log("Usuario firebase emamil: " + this.usuario_email_atual);
+
+      console.log("Usuario atual nome: " + this.usuario_atual.nome);
     //Passando usuario atual para a pagina de perfil de usuario
     this.navCtrl.push(PerfilUsuarioPage, {
       param1: this.usuario_atual

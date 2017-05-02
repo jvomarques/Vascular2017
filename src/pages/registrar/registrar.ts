@@ -29,8 +29,9 @@ export class RegistrarPage {
   }
 
   ionViewDidLoad() {
-    this.credencial = new Credencial();
-    this.usuario = new Usuario();
+
+    // this.credencial = new Credencial();
+    // this.usuario = new Usuario();
 
     this.loginProvider.registroSucessoEventEmitter.subscribe(
       user =>
@@ -85,8 +86,9 @@ export class RegistrarPage {
 
   fazRegistro(){
 
-    let erro;
-    this.loginProvider.registroFalhaEventEmitter.subscribe(error => {erro = error.message});
+    //let erro;
+    //this.loginProvider.registroFalhaEventEmitter.subscribe(error => {erro = error.message});
+    
     this.loginProvider.registrarUsuario(this.credencial, this.usuario);
     
     //SETANDO VALORES DA AGENDA DE ACORDO COM USUARIO CADASTRADO
