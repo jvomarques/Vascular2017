@@ -22,4 +22,8 @@ export class ProgramacaoAgendaProvider {
       this.referencia.child(idRef).update(programacao_agenda);
   }
 
+  deletarProgramacaAgenda(programacao_agenda:ProgramacaoAgenda){
+    return this.referencia.child(programacao_agenda.idReferencia).remove();
+  }
+
 }

@@ -1,6 +1,10 @@
+import { PalestranteProvider } from './../../providers/palestrante-provider';
+import { PalestranteProgramacaoProvider } from './../../providers/palestrante-programacao-provider';
+import { PalestranteProgramacao } from './../../model/palestrante-programacao';
 import { ProgramacaoAgenda } from './../../model/programacao-agenda';
 import { ProgramacaoAgendaProvider } from './../../providers/programacao-agenda-provider';
 import { Agenda } from './../../model/agenda';
+import { Palestrante } from './../../model/palestrante';
 import { AgendaProvider } from './../../providers/agenda-provider';
 import { UsuarioProvider } from './../../providers/usuario-provider';
 import { Usuario } from './../../model/usuario';
@@ -54,12 +58,19 @@ export class ProgramacaoTabsPage1 {
   agendas:Array<Agenda>;
   programacoes:Array<Programacao>;
   programacoes_agenda:Array<ProgramacaoAgenda>;
+
+  //Vetor responsável por receber os dados da tabela palestrante-programacao
+  palestrates_programacoes: Array<PalestranteProgramacao>;
     
+  //Vetor responsável por receber os dados da tabela 'palestrantes'
+  palestrantes: Array<Palestrante>;
 
   constructor(public navCtrl: NavController, public navParams: NavParams,
               public programacaoProvider: ProgramacaoProvider, public ngZone: NgZone,
               public usuarioProvider: UsuarioProvider, public agendaProvider: AgendaProvider,
-              public programacao_agendaProvider: ProgramacaoAgendaProvider) {
+              public programacao_agendaProvider: ProgramacaoAgendaProvider, 
+              public palestranteProgramacaoProvider: PalestranteProgramacaoProvider,
+              public palestranteProvider: PalestranteProvider) {
 
                  this.programacao_cientifica = new Array<Programacao>();
                  this.programacao_social = new Array<Programacao>();
@@ -70,6 +81,8 @@ export class ProgramacaoTabsPage1 {
                  this.programacoes = new Array<Programacao>();
                  this.programacoes_agenda = new Array<ProgramacaoAgenda>();
 
+                 this.palestrates_programacoes = new Array<PalestranteProgramacao>();
+                 this.palestrantes = new Array<Palestrante>();
               }
               
   inicializar() {
@@ -133,6 +146,30 @@ export class ProgramacaoTabsPage1 {
         })
       })
 
+    //RETORNANDO LISTA COM OS DADOS DA TABELA PALESTRANTE-PROGRAMACAO
+    this.palestranteProgramacaoProvider.referencia.on('value', (snapshot) => {
+      this.ngZone.run( () => {
+        let innerArray = new Array();
+        snapshot.forEach(elemento => {
+          let el = elemento.val();
+          innerArray.push(el);
+        })
+        this.palestrates_programacoes = innerArray;
+      })
+    })
+
+    //RETORNANDO LISTA DE TODOS OS PALESTRANTES
+    this.palestranteProvider.referencia.on('value', (snapshot) => {
+      this.ngZone.run( () => {
+        let innerArray = new Array();
+        snapshot.forEach(elemento => {
+          let el = elemento.val();
+          innerArray.push(el);
+        })
+        this.palestrantes = innerArray;
+      })
+    })
+
     let aux = new Array();
     for(let i = 0; i < this.programacoes.length; i++)
       if(this.programacoes[i].tipo == "Cientifica")
@@ -176,7 +213,8 @@ export class ProgramacaoTabsPage1 {
   abrirProgramacao(info){
       this.navCtrl.push(ProgramacaoCompletaPage, {
         programacao: info, usuarios: this.usuarios, agendas: this.agendas, programacoes: this.programacoes,
-        programacoes_agenda: this.programacoes_agenda
+        programacoes_agenda: this.programacoes_agenda, palestrates_programacoes: this.palestrates_programacoes,
+        palestrantes: this.palestrantes
       });
   }
 
@@ -221,10 +259,18 @@ export class ProgramacaoTabsPage2 {
   programacoes:Array<Programacao>;
   programacoes_agenda:Array<ProgramacaoAgenda>;
 
+ //Vetor responsável por receber os dados da tabela palestrante-programacao
+  palestrates_programacoes: Array<PalestranteProgramacao>;
+
+  //Vetor responsável por receber os dados da tabela 'palestrantes'
+  palestrantes: Array<Palestrante>;
+
   constructor(public navCtrl: NavController, public navParams: NavParams,
               public programacaoProvider: ProgramacaoProvider, public ngZone: NgZone,
               public usuarioProvider: UsuarioProvider, public agendaProvider: AgendaProvider,
-              public programacao_agendaProvider: ProgramacaoAgendaProvider) {
+              public programacao_agendaProvider: ProgramacaoAgendaProvider, 
+              public palestranteProgramacaoProvider: PalestranteProgramacaoProvider,
+              public palestranteProvider: PalestranteProvider) {
 
                  this.programacao_cientifica = new Array<Programacao>();
                  this.programacao_social = new Array<Programacao>();
@@ -234,6 +280,9 @@ export class ProgramacaoTabsPage2 {
                  this.agendas = new Array<Agenda>();
                  this.programacoes = new Array<Programacao>();
                  this.programacoes_agenda = new Array<ProgramacaoAgenda>();
+
+                 this.palestrates_programacoes = new Array<PalestranteProgramacao>();
+                 this.palestrantes = new Array<Palestrante>();
               }
 
   ionViewDidLoad() {
@@ -284,6 +333,30 @@ export class ProgramacaoTabsPage2 {
         })
       })
 
+    //RETORNANDO LISTA COM OS DADOS DA TABELA PALESTRANTE-PROGRAMACAO
+    this.palestranteProgramacaoProvider.referencia.on('value', (snapshot) => {
+      this.ngZone.run( () => {
+        let innerArray = new Array();
+        snapshot.forEach(elemento => {
+          let el = elemento.val();
+          innerArray.push(el);
+        })
+        this.palestrates_programacoes = innerArray;
+      })
+    })
+
+    //RETORNANDO LISTA DE TODOS OS PALESTRANTES
+    this.palestranteProvider.referencia.on('value', (snapshot) => {
+      this.ngZone.run( () => {
+        let innerArray = new Array();
+        snapshot.forEach(elemento => {
+          let el = elemento.val();
+          innerArray.push(el);
+        })
+        this.palestrantes = innerArray;
+      })
+    })
+
     let aux = new Array();
     for(let i = 0; i < this.programacoes.length; i++)
       if(this.programacoes[i].tipo == "Social")
@@ -294,11 +367,11 @@ export class ProgramacaoTabsPage2 {
 
   abrirProgramacao(info){
       this.navCtrl.push(ProgramacaoCompletaPage, {
-        programacao: info, usuarios: this.usuarios, agendas: this.agendas, programacoes: this.programacao_social,
-        programacoes_agenda: this.programacoes_agenda
+        programacao: info, usuarios: this.usuarios, agendas: this.agendas, programacoes: this.programacoes,
+        programacoes_agenda: this.programacoes_agenda, palestrates_programacoes: this.palestrates_programacoes,
+        palestrantes: this.palestrantes
       });
   }
-
 }
 
 /*---------------------------------------------------------------------------------------------------*/
@@ -340,10 +413,19 @@ export class ProgramacaoTabsPage3 {
   programacoes:Array<Programacao>;
   programacoes_agenda:Array<ProgramacaoAgenda>;
 
+ //Vetor responsável por receber os dados da tabela palestrante-programacao
+  palestrates_programacoes: Array<PalestranteProgramacao>;
+  
+  //Vetor responsável por receber os dados da tabela 'palestrantes'
+  palestrantes: Array<Palestrante>;
+
+
   constructor(public navCtrl: NavController, public navParams: NavParams,
               public programacaoProvider: ProgramacaoProvider, public ngZone: NgZone,
               public usuarioProvider: UsuarioProvider, public agendaProvider: AgendaProvider,
-              public programacao_agendaProvider: ProgramacaoAgendaProvider) {
+              public programacao_agendaProvider: ProgramacaoAgendaProvider, 
+              public palestranteProgramacaoProvider: PalestranteProgramacaoProvider,
+              public palestranteProvider: PalestranteProvider) {
 
                  this.programacao_cientifica = new Array<Programacao>();
                  this.programacao_social = new Array<Programacao>();
@@ -353,6 +435,9 @@ export class ProgramacaoTabsPage3 {
                  this.agendas = new Array<Agenda>();
                  this.programacoes = new Array<Programacao>();
                  this.programacoes_agenda = new Array<ProgramacaoAgenda>();
+
+                 this.palestrates_programacoes = new Array<PalestranteProgramacao>();
+                 this.palestrantes = new Array<Palestrante>();
               }
 
 
@@ -404,6 +489,30 @@ export class ProgramacaoTabsPage3 {
         })
       })
 
+    //RETORNANDO LISTA COM OS DADOS DA TABELA PALESTRANTE-PROGRAMACAO
+    this.palestranteProgramacaoProvider.referencia.on('value', (snapshot) => {
+      this.ngZone.run( () => {
+        let innerArray = new Array();
+        snapshot.forEach(elemento => {
+          let el = elemento.val();
+          innerArray.push(el);
+        })
+        this.palestrates_programacoes = innerArray;
+      })
+    })
+
+    //RETORNANDO LISTA DE TODOS OS PALESTRANTES
+    this.palestranteProvider.referencia.on('value', (snapshot) => {
+      this.ngZone.run( () => {
+        let innerArray = new Array();
+        snapshot.forEach(elemento => {
+          let el = elemento.val();
+          innerArray.push(el);
+        })
+        this.palestrantes = innerArray;
+      })
+    })
+
     let aux = new Array();
     for(let i = 0; i < this.programacoes.length; i++)
       if(this.programacoes[i].tipo == "Comissões")
@@ -414,8 +523,9 @@ export class ProgramacaoTabsPage3 {
 
   abrirProgramacao(info){
       this.navCtrl.push(ProgramacaoCompletaPage, {
-        programacao: info, usuarios: this.usuarios, agendas: this.agendas, programacoes: this.programacao_comissoes,
-        programacoes_agenda: this.programacoes_agenda
+        programacao: info, usuarios: this.usuarios, agendas: this.agendas, programacoes: this.programacoes,
+        programacoes_agenda: this.programacoes_agenda, palestrates_programacoes: this.palestrates_programacoes,
+        palestrantes: this.palestrantes
       });
   }
 

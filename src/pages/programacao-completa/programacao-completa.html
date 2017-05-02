@@ -14,5 +14,22 @@
     
   </ion-card-content>
 </ion-card>
-<button (click)="addParaAgenda()" ion-button full class="botao-borda" style="background-color: #3a5897;"> {{textoBotaoAdd_Delete}} </button>
+
+<ion-card class="card-borda">
+
+    <ion-list-header>Palestrantes</ion-list-header>
+
+    <ion-item *ngFor="let palestrante_atual of palestrantes_atuais">
+        <ion-avatar item-left>
+            <img src="{{palestrante_atual.foto}}">
+        </ion-avatar>
+        <h2>{{palestrante_atual.nome}}</h2>
+        <!--<p>{{palestrante_atual.nacionalidade}}</p>-->
+        <button ion-button clear item-right (click)="abrirPalestrante(this.palestrante_atual)">Ver</button>
+        <!--<ion-note item-right>{{programacao_atual.horario}}</ion-note>-->
+    </ion-item>
+</ion-card>
+
+
+<button (click)="add_DeleteAgenda()" ion-button full class="botao-borda" style="background-color: #3a5897;"> {{textoBotaoAdd_Delete}} </button>
 </ion-content>

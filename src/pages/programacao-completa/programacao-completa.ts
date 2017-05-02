@@ -1,8 +1,11 @@
+import { PalestranteDescricaoPage } from './../palestrante-descricao/palestrante-descricao';
+import { PalestranteProgramacao } from './../../model/palestrante-programacao';
 import { AgendaPage } from './../agenda/agenda';
 import { HomePage } from './../home/home';
 import { ProgramacaoProvider } from './../../providers/programacao-provider';
 import { UsuarioProvider } from './../../providers/usuario-provider';
 import { Usuario } from './../../model/usuario';
+import { Palestrante } from './../../model/palestrante';
 import { ProgramacaoAgendaProvider } from './../../providers/programacao-agenda-provider';
 import { AgendaProvider } from './../../providers/agenda-provider';
 import { Agenda } from './../../model/agenda';
@@ -41,6 +44,16 @@ export class ProgramacaoCompletaPage {
   estouNaAgenda:boolean;
   textoBotaoAdd_Delete:string;
 
+   //Vetor responsável por receber os dados da tabela palestrante-programacao
+  palestrates_programacoes: Array<PalestranteProgramacao>;
+  palestrates_programacoes_atual: Array<PalestranteProgramacao>;
+
+  id_palestrantes: Array<string>;
+  palestrantes: Array<Palestrante>;
+  palestrantes_atuais: Array<Palestrante>;
+
+
+
   constructor(public navCtrl: NavController, public navParams: NavParams,
               public agendaProvider: AgendaProvider, public programacao_agendaProvider: ProgramacaoAgendaProvider,
               public ngZone: NgZone, public usuarioProvider: UsuarioProvider,
@@ -51,11 +64,18 @@ export class ProgramacaoCompletaPage {
               this.programacoes_agenda = navParams.get('programacoes_agenda');
               this.programacoes = navParams.get('programacoes');
               this.estouNaAgenda = navParams.get('estouNaAgenda');
+              this.palestrates_programacoes = navParams.get('palestrates_programacoes');
+              this.palestrantes = navParams.get('palestrantes')
 
               this.programacao_agenda = new ProgramacaoAgenda();
 
               this.programacoes_por_agenda = new Array<Programacao>();
               this.programacao_agenda_por_usuario = new Array<ProgramacaoAgenda>();
+
+              this.palestrates_programacoes_atual = new Array<PalestranteProgramacao>();
+
+              this.id_palestrantes = new Array<string>();
+              this.palestrantes_atuais = new Array<Palestrante>();
   }
 
   ionViewDidLoad() {
@@ -83,29 +103,70 @@ export class ProgramacaoCompletaPage {
       //Pegando os valores da tabela programacao_agenda de acordo com a agenda atual
       for(let i = 0; i < this.programacoes_agenda.length; i++)
         if(this.programacoes_agenda[i].id_agenda == this.agenda_atual.idReferencia)
-        {
-          console.log("entrou1");
           this.programacao_agenda_por_usuario.push(this.programacoes_agenda[i]);
-        }
+        
 
-      //Retornando todas as programacoes da minha agenda
+      //Retornando todas as programacoes da minha agenda para não permitir adicionar programações repetidas
       for(let i = 0; i < this.programacoes.length; i++)
         for(let j = 0; j < this.programacao_agenda_por_usuario.length; j++) 
           if(this.programacoes[i].idReferencia == this.programacao_agenda_por_usuario[j].id_programacao)
-          {
-            console.log("entrou");
             this.programacoes_por_agenda.push(this.programacoes[i]);
-          }
 
+
+      /*FLUXO PARA LISTAGEM DE PALESTRANTES POR PROGRAMACAO
+        1) LISTAR TODAS OS PALESTRANTES
+
+        2) PEGAR MINHA PROGRAMAÇÃO ATUAL
+
+        3) LISTAR TODOS OS DADOS DA TABELA PALESTRANTE_PROGRAMACAO
+
+        4) PEGAR TODOS OS ID DE PALESTRANTES DE ACORDO COM MINHA PROGRAMAÇÃO ATUAL
+
+        5) PEGAR LISTA DE TODOS OS PALESTRANTES DE ACORDO COM OS ID'S ENCONTRADOS EM (4)
+      */
+
+        //Pegando os valores da tabela auxiliar 'Palestrante-Programacao' de acordo com a programação atual
+        for(let i = 0; i < this.palestrates_programacoes.length; i++)
+            if(this.palestrates_programacoes[i].id_programacao == this.programacao.idReferencia)
+                this.palestrates_programacoes_atual.push(this.palestrates_programacoes[i]);
+
+        //Pegando o ID de todas os palestrantes de acordo com a tabela auxiliar 'palestrante-programacao'
+        for(let i = 0; i < this.palestrates_programacoes_atual.length; i++)
+            this.id_palestrantes.push(this.palestrates_programacoes_atual[i].id_palestrante);
+
+        for(let i = 0; i < this.id_palestrantes.length; i++)
+        {
+            for(let j = 0; j < this.palestrantes.length; j++)
+            {
+              if(this.id_palestrantes[i] == this.palestrantes[j].idReferencia)
+              {
+                this.palestrantes_atuais.push(this.palestrantes[j]);
+                break;
+              }
+            }
+        }
 
   }
 
-  addParaAgenda(){
+    abrirPalestrante(palestrante){
 
-      console.log("Minhas programacoes: ");
-      for(let j = 0; j < this.programacoes_por_agenda.length; j++) 
-        console.log(this.programacoes_por_agenda[j].titulo);
+      let palestrante_atual:Palestrante;
 
+      for(let i = 0; i < this.palestrantes.length; i++)
+        if(this.palestrantes[i].nome == palestrante.nome)
+          palestrante_atual = this.palestrantes[i];
+
+      this.navCtrl.push(PalestranteDescricaoPage, {
+        param1: palestrante_atual, palestrantes: this.palestrantes, 
+        palestrates_programacoes: this.palestrates_programacoes, programacoes: this.programacoes
+      });
+    
+  }
+
+  add_DeleteAgenda(){
+
+    if(!this.estouNaAgenda)
+    {
       //Pegando o usuario com email igual ao email da autenticação
       for(let i = 0; i < this.usuarios.length; i++)
         if(this.usuarios[i].email == this.usuario_email_atual){
@@ -121,7 +182,7 @@ export class ProgramacaoCompletaPage {
           break;
         }
       }
-      console.log("Minha atual agenda: " + this.agenda_atual.email_usuario);
+      
 
       let programacao_ja_existe: boolean;
       programacao_ja_existe = false;
@@ -129,7 +190,6 @@ export class ProgramacaoCompletaPage {
       {
         if(this.programacoes_por_agenda[i].idReferencia == this.programacao.idReferencia)
         {   
-            console.log("ENTROU");
             let alert = this.alertCtrl.create({
             title: 'Agenda',
             subTitle: 'Programação já existe na agenda.',
@@ -160,6 +220,23 @@ export class ProgramacaoCompletaPage {
 
         this.navCtrl.pop();
       }
+    }
+    else {
+
+      for(let i = 0; i < this.programacoes_agenda.length; i++)
+        if(this.programacoes_agenda[i].id_agenda == this.agenda_atual.idReferencia &&
+          this.programacoes_agenda[i].id_programacao == this.programacao.idReferencia)
+            this.programacao_agendaProvider.deletarProgramacaAgenda(this.programacoes_agenda[i]);
+
+      let alert = this.alertCtrl.create({
+          title: 'Agenda',
+          subTitle: 'Programação removida da agenda com sucesso.',
+          buttons: ['Ok']
+        });
+        alert.present();
+      
+    }
+
 
 
     }

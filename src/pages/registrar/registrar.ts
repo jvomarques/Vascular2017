@@ -85,10 +85,10 @@ export class RegistrarPage {
   }
 
   fazRegistro(){
-
-    //let erro;
-    //this.loginProvider.registroFalhaEventEmitter.subscribe(error => {erro = error.message});
     
+    //Deixando email de usuario com letras minusculas
+    this.usuario.email = this.usuario.email.toLowerCase();
+
     this.loginProvider.registrarUsuario(this.credencial, this.usuario);
     
     //SETANDO VALORES DA AGENDA DE ACORDO COM USUARIO CADASTRADO
