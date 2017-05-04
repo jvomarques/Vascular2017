@@ -6,27 +6,9 @@
 
 <ion-content class="background">
 
- <!--<ion-slides pager>
-    <ion-slide *ngFor="let turismo of turismos">
-
-      <ion-card style="" class="card-borda">
-        <img src="{{turismo.imagem}}"/>
-        <ion-card-content >
-          <ion-card-title>
-            {{turismo.titulo}}
-          </ion-card-title>
-          <p>
-            {{turismo.conteudo}}
-          </p>
-        </ion-card-content>
-      </ion-card>
-
-    </ion-slide>
-  </ion-slides>-->
-
 <ion-list style="margin-left: 5%;" [virtualScroll]="turismos">       
 
-  <ion-card style="margin-left: 0;" class="card-borda" *virtualItem="let turismo">
+  <ion-card (click)="abrirSaibaMaisTurismo(this.turismo)" style="margin-left: 0;" class="card-borda" *virtualItem="let turismo">
     
     <img src="{{turismo.imagem}}"/>
     
@@ -52,3 +34,19 @@
 </ion-list>
 
 </ion-content>
+
+<!--<ion-slides pager autoplay="400" loop="true" speed="3000">
+
+  <ion-slide style="background-color: green">
+    <h2>Slide 1</h2>
+  </ion-slide>
+
+  <ion-slide style="background-color: blue">
+    <h2>Slide 2</h2>
+  </ion-slide>
+
+  <ion-slide style="background-color: red">
+    <h2>Slide 3</h2>
+  </ion-slide>
+
+</ion-slides>-->

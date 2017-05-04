@@ -15,6 +15,7 @@
               </ion-avatar>
               <h2>{{palestrante.nome}}</h2>
               <p>{{palestrante.descricao}}</p>
+              <button ion-button clear item-right (click)="abrirDescricaoPalestrante(this.palestrante)">Ver</button>
           </ion-item>
       </ion-list>
 </ion-content>

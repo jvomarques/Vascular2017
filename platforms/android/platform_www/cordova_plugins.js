@@ -50,8 +50,8 @@ module.exports.metadata =
     "cordova-plugin-statusbar": "2.2.1",
     "cordova-plugin-device": "1.1.4",
     "cordova-plugin-splashscreen": "4.0.2",
-    "cordova-plugin-console": "1.0.5",
-    "onesignal-cordova-plugin": "2.0.11"
+    "onesignal-cordova-plugin": "2.0.11",
+    "cordova-plugin-console": "1.0.5"
 };
 // BOTTOM OF METADATA
 });

@@ -10,7 +10,7 @@
 <ion-content class="background" padding>
 
   <ion-list [virtualScroll]="informacoes">
-    <ion-item class="lista" ion-item *virtualItem="let informacao">
+    <ion-item (click)="abrirInformacaoCompleta(this.informacao)" class="lista" ion-item *virtualItem="let informacao">
       <ion-thumbnail item-left>
         <img src={{informacao.imagem}}>
       </ion-thumbnail>

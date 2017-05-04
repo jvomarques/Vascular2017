@@ -4,6 +4,9 @@ import { TurismoProvider } from './../../providers/turismo-provider';
 import { Component, NgZone } from '@angular/core';
 import { NavController, NavParams } from 'ionic-angular';
 
+import * as $ from "jquery";
+import 'slick-carousel/slick/slick';
+
 
 @Component({
   selector: 'page-turismo',
@@ -12,9 +15,20 @@ import { NavController, NavParams } from 'ionic-angular';
 export class TurismoPage {
 
   turismos:Array<Turismo>;
-  
   constructor(public navCtrl: NavController, public navParams: NavParams,
               public turismoProvider: TurismoProvider, public ngZone: NgZone) {}
+
+
+  ngOnInit() {
+let homeOptions = {
+    initialSlide: 0,
+    loop: true,
+    autoplay:2000,
+    autoplayDisableOnInteraction: false
+  };
+
+
+  }
 
   ionViewDidLoad() {
     

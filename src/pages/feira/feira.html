@@ -8,7 +8,7 @@
 
 <ion-list style="margin-left: 5%;" [virtualScroll]="feiras">       
 
-  <ion-card style="margin-left: 0;" class="card-borda" *virtualItem="let feira">
+  <ion-card (click)="abrirSaibaMaisFeira(this.feira)" style="margin-left: 0;" class="card-borda" *virtualItem="let feira">
     
     <img src="{{feira.imagem}}"/>
     

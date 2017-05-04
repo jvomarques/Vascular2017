@@ -22,10 +22,10 @@
         "cordova-plugin-splashscreen": {
             "PACKAGE_NAME": "io.ionic.starter"
         },
-        "cordova-plugin-console": {
+        "onesignal-cordova-plugin": {
             "PACKAGE_NAME": "io.ionic.starter"
         },
-        "onesignal-cordova-plugin": {
+        "cordova-plugin-console": {
             "PACKAGE_NAME": "io.ionic.starter"
         }
     },

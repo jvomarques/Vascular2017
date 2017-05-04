@@ -1,3 +1,4 @@
+import { PalestranteDescricaoWithNavBarPage } from './../palestrante-descricao-with-nav-bar/palestrante-descricao-with-nav-bar';
 import { Programacao } from './../../model/programacao';
 import { PalestranteProgramacao } from './../../model/palestrante-programacao';
 import { ProgramacaoProvider } from './../../providers/programacao-provider';
@@ -77,7 +78,7 @@ export class PalestrantesListaPage {
         if(this.palestrantes[i].nome == palestrante.nome)
           palestrante_atual = this.palestrantes[i];
 
-      this.navCtrl.push(PalestranteDescricaoPage, {
+      this.navCtrl.push(PalestranteDescricaoWithNavBarPage, {
         param1: palestrante_atual, palestrantes: this.palestrantes, 
         palestrates_programacoes: this.palestrates_programacoes, programacoes: this.programacoes
       });

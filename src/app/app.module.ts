@@ -51,6 +51,9 @@ import firebase from "firebase";
 
 import {OneSignal} from '@ionic-native/onesignal';
 
+import { CloudSettings, CloudModule } from '@ionic/cloud-angular';
+
+
 /*Importando configurações do projeto firebase*/
 const firebaseConfig = {
   apiKey: "AIzaSyDPwwJcjnGmLZpLA3d17dpl1xYFLrOGH2E",
@@ -59,6 +62,8 @@ const firebaseConfig = {
   storageBucket: "event-b66ef.appspot.com",
   messagingSenderId: "757000610628"
 };
+
+
 
 @NgModule({
   declarations: [
@@ -160,7 +165,7 @@ export class AppModule {
     this.initializeApp();
     
   }
-
+    
     initializeApp() {
     this._platform.ready().then(() => {
       this._OneSignal.startInit("76676dc5-7ed7-403c-bd31-f0bc148e6505", "757000610628");

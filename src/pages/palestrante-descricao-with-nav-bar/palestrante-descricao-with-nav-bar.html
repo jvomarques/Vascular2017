@@ -1,18 +1,51 @@
-<!--
-  Generated template for the PalestranteDescricaoWithNavBar page.
 
-  See http://ionicframework.com/docs/v2/components/#navigation for more info on
-  Ionic pages and navigation.
--->
 <ion-header>
 
-  <ion-navbar>
-    <ion-title>palestrante-descricao-withNavBar</ion-title>
+  <ion-navbar color="navbarColor">
+    <ion-title>{{palestrante.nome}}</ion-title>
   </ion-navbar>
 
 </ion-header>
 
 
-<ion-content padding>
+
+<ion-content class="background" padding>
+
+<ion-card class="card-borda">
+
+  <ion-item>
+    <ion-avatar item-left>
+      <img src="{{palestrante.foto_bandeira}}">
+    </ion-avatar>
+    <h2>{{palestrante.nome}}</h2>
+    <p>{{palestrante.nacionalidade}}</p>
+  </ion-item>
+
+  <img src="{{palestrante.foto}}">
+
+  <ion-card-content>
+    <p>{{palestrante.descricao}}</p>
+  </ion-card-content>
+
+
+</ion-card>
+
+<ion-card class="card-borda">
+
+    <ion-list-header>Programações</ion-list-header>
+
+    <ion-item *ngFor="let programacao_atual of programacoes_atual">
+        <ion-avatar item-left>
+            <img src="{{programacao_atual.imagem}}">
+        </ion-avatar>
+        <h2>{{programacao_atual.titulo}}</h2>
+        <p>{{programacao_atual.tipo}}</p>
+        <button ion-button clear item-right (click)="abrirProgramacao(this.programacao_atual)">Ver</button>
+        <ion-note item-right>{{programacao_atual.horario}}</ion-note>
+    </ion-item>
+</ion-card>
+
+
 
 </ion-content>
+

@@ -32,7 +32,7 @@ import firebase from 'firebase';
         
         <ion-list-header>{{programacao.data}}</ion-list-header>
 
-        <ion-item>
+        <ion-item (click)="abrirProgramacao(this.programacao)">
           <ion-avatar item-left>
             <img src="{{programacao.imagem}}">
           </ion-avatar>
