@@ -9,7 +9,7 @@
 
 <ion-content class="background" padding>
    <ion-list  [virtualScroll]="palestrantes">
-          <ion-item (click)="abrirDescricaoPalestrante(this.palestrante)" class="lista-borda" *virtualItem="let palestrante">
+          <ion-item class="lista-borda" *virtualItem="let palestrante">
               <ion-avatar item-left>
               <img src="{{palestrante.foto}}">
               </ion-avatar>
