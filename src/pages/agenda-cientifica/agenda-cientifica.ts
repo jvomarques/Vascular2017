@@ -1,3 +1,4 @@
+import { ProgramacaoPorDataPage } from './../programacao-por-data/programacao-por-data';
 import { PalestranteProgramacao } from './../../model/palestrante-programacao';
 import { PalestranteProvider } from './../../providers/palestrante-provider';
 import { PalestranteProgramacaoProvider } from './../../providers/palestrante-programacao-provider';
@@ -40,6 +41,9 @@ export class AgendaCientificaPage {
   palestrantes: Array<Palestrante>;
   palestrates_programacoes: Array<PalestranteProgramacao>;
 
+  //Vetor responsável por receber valores da datas de programacoes
+  programacoes_data;
+
   constructor(public navCtrl: NavController, public navParams: NavParams,
               public agendaProvider: AgendaProvider, public programacao_agendaProvider: ProgramacaoAgendaProvider,
               public ngZone: NgZone, public usuarioProvider: UsuarioProvider,
@@ -50,7 +54,6 @@ export class AgendaCientificaPage {
                 this.programacoes_por_agenda = new Array<Programacao>();
                 this.programacao_agenda_por_usuario = new Array<ProgramacaoAgenda>();
                 this.usuarios = new Array<Usuario>();
-                this.programacoes = new Array<Programacao>();
                 this.agendas = new Array<Agenda>();
                 this.programacoes_agenda = new Array<ProgramacaoAgenda>()
                 
@@ -58,6 +61,18 @@ export class AgendaCientificaPage {
 
                 this.palestrantes = new Array<Palestrante>();
                 this.palestrates_programacoes = new Array<PalestranteProgramacao>();
+                        //RETORNANDO LISTA DE TODAS AS PROGRAMACOES DO TIPO CIENTIFICA
+        this.programacaoProvider.referencia.on('value', (snapshot) => {
+          this.ngZone.run( () => {
+            let innerArray = new Array();
+            snapshot.forEach(elemento => {
+              let el = elemento.val();
+              if(el.tipo == "Cientifica")
+                innerArray.push(el);
+            })
+            this.programacoes = innerArray;
+          })
+        })
               }
 
   ionViewDidLoad() {
@@ -162,10 +177,32 @@ export class AgendaCientificaPage {
         for(let j = 0; j < this.programacao_agenda_por_usuario.length; j++) 
           if(this.programacoes[i].idReferencia == this.programacao_agenda_por_usuario[j].id_programacao)
             this.programacoes_por_agenda.push(this.programacoes[i]);
+
+
+      /*AGRUPANDO POR DATAS*/ 
+      console.log("Tamanho do meu Array: " + this.programacoes_por_agenda.length);
+
+      let programacoes_data_aux =[];
+      
+      for(let i = 0; i < this.programacoes_por_agenda.length; i++)
+        programacoes_data_aux[i] = this.programacoes_por_agenda[i].data;
+      
+      this.programacoes_data = programacoes_data_aux.filter(function(este, i) {
+          return programacoes_data_aux.indexOf(este) == i;
+      })
+
       
       console.log("Minhas programacoes")
       for(let j = 0; j < this.programacoes_por_agenda.length; j++) 
         console.log(this.programacoes_por_agenda[j].titulo);
+  }
+
+  abrirProgramacaoPorData(data){
+    this.navCtrl.push(ProgramacaoPorDataPage, {
+      data: data, usuarios: this.usuarios, agendas: this.agendas, programacoes: this.programacoes_por_agenda,
+        programacoes_agenda: this.programacoes_agenda, palestrates_programacoes: this.palestrates_programacoes,
+        palestrantes: this.palestrantes, estouNaAgenda: this.estouNaAgenda
+    });
   }
 
   abrirProgramacao(info){

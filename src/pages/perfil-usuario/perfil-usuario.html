@@ -7,18 +7,22 @@
 </ion-header>
 
 
-<ion-content >
-
+<ion-content class="background" padding>
+<!--
     <div class="usuario-icone-background" style="background-color: #3e4095;">
       <button class="botao-editar-usuario" ion-button clear icon-only (click)="abrirUsuarioEditar()">
         <ion-icon name="create" md="md-create" is-active="false"></ion-icon>
       </button>
       <img class="usuario-icone" src="assets/img/usuario-icone.png" alt="">
-      <!--<h1 padding style="color:white">{{usuario.nome}}</h1>-->
-    </div>
+    </div>-->
+      <div class="header">
+        <ion-row>
+          <img class="img_logo" src="assets/img/logo_congresso.png">
+        </ion-row>
+      </div>
+  
+      <ion-list class="lista-borda">
 
-    <div padding>
-      <ion-list>
           <ion-item>
               <ion-avatar item-left>
               <ion-icon name="person"></ion-icon>
@@ -44,7 +48,12 @@
           </ion-item>
           
       </ion-list>
-    </div>
+
+      <ion-row>
+        <ion-col>
+          <button ion-button full class="botao-borda" style="background-color: #3e4095;" (click)="abrirUsuarioEditar()"> Editar dados </button>
+        </ion-col>
+      </ion-row>
 
 
 </ion-content>

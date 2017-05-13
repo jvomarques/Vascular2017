@@ -1,3 +1,5 @@
+import { Programacao } from './../../model/programacao';
+import { ProgramacaoProvider } from './../../providers/programacao-provider';
 import { SobreAppPage } from './../sobre-app/sobre-app';
 import { SobrePage } from './../sobre/sobre';
 import { AconteceAgoraPage } from './../acontece-agora/acontece-agora';
@@ -14,11 +16,14 @@ import { PerfilUsuarioPage } from './../perfil-usuario/perfil-usuario';
 import { LoginProvider } from './../../providers/loginprovider';
 import { Component, NgZone, ElementRef, ViewChild } from '@angular/core';
 
-import { NavController, AlertController, PopoverController, NavParams } from 'ionic-angular';
+import { NavController, AlertController, PopoverController, NavParams, Platform } from 'ionic-angular';
 
 import {InfomacoesListaPage} from '../infogerais/infogerais';
 
 import firebase from "firebase";
+
+// import { InAppBrowser } from 'ionic-native';
+
 
 @Component({
   template: 
@@ -134,10 +139,39 @@ export class PopoverPage {
 export class HomePage {
 
 
-  
+  programacoes:Array<Programacao>;
+
+  programacoes_sociais:Array<Programacao>;
+
   constructor(public navCtrl: NavController, public alertCtrl: AlertController,
             public ngZone: NgZone,  public usuarioProvider: UsuarioProvider,
-            public popoverCtrl: PopoverController) {}
+            public popoverCtrl: PopoverController, private programacaoProvider: ProgramacaoProvider,
+            public platform: Platform) {
+
+    this.programacaoProvider.referencia.on('value', (snapshot) => {
+      this.ngZone.run( () => {
+            let innerArray = new Array();
+            snapshot.forEach(elemento => {
+              let el = elemento.val();
+              innerArray.push(el);
+            })
+            this.programacoes = innerArray;
+          })
+        })
+
+      this.programacaoProvider.referencia.on('value', (snapshot) => {
+      this.ngZone.run( () => {
+            let innerArray = new Array();
+            snapshot.forEach(elemento => {
+              let el = elemento.val();
+              if(el.tipo == "Social")
+                innerArray.push(el);
+            })
+            this.programacoes_sociais = innerArray;
+          })
+        })
+
+    }
 
   ionViewDidLoad(){}
 
@@ -158,11 +192,11 @@ export class HomePage {
   }
 
   abrirProgramacao(){
-    this.navCtrl.push(ProgramacaoListaPage);
+    this.navCtrl.push(ProgramacaoListaPage, {programacoes: this.programacoes, programacoes_sociais: this.programacoes_sociais});
   }
 
   abrirAgenda(){
-      this.navCtrl.push(AgendaPage);
+      this.navCtrl.push(AgendaPage, {programacoes: this.programacoes});
   }
 
   abrirTurismo(){
@@ -178,7 +212,16 @@ export class HomePage {
   }
 
   abrirSobre(){
-      this.navCtrl.push(SobrePage);
-  }
+    // this.platform.ready().then(() => {
+    //     let ref = new InAppBrowser('http://lisaiceland.com/','_blank');
+    //     ref.on('exit').subscribe(() => {
+    //       console.log('Exit In-App Browser');
+    //     });
+    //   });
+    // }
+    }
+
+
+ 
 
 }

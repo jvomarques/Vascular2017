@@ -129,7 +129,7 @@ export class PalestranteDescricaoPage {
 
   abrirProgramacao(info){
       console.log(info.imagem);
-      this.navCtrl.push(ProgramacaoCompletaWithNavBarPage, {
+      this.navCtrl.push(ProgramacaoCompletaPage, {
         programacao: info, usuarios: this.usuarios, agendas: this.agendas, programacoes: this.programacoes,
         programacoes_agenda: this.programacoes_agenda
       });

@@ -1,3 +1,4 @@
+import { Programacao } from './../../model/programacao';
 import { AgendaComissoesPage } from './../agenda-comissoes/agenda-comissoes';
 import { AgendaSocialPage } from './../agenda-social/agenda-social';
 import { AgendaCientificaPage } from './../agenda-cientifica/agenda-cientifica';
@@ -18,9 +19,13 @@ export class AgendaPage {
   agendaSocial: any;
   agendaComissoes:any;
 
+  progamacoes: Programacao;
+
   constructor(public navCtrl: NavController, public navParams: NavParams, platform: Platform) {
     this.isAndroid = platform.is('android');
-    this.agendaCietifica = AgendaCientificaPage;
+    
+    this.progamacoes = navParams.get('programacoes');
+    this.agendaCietifica = AgendaCientificaPage,{programacoes: this.progamacoes};
     this.agendaSocial = AgendaSocialPage;
     this.agendaComissoes = AgendaComissoesPage;
   }

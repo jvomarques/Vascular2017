@@ -1,3 +1,4 @@
+import { Push } from './../../model/push';
 import { Component } from '@angular/core';
 import { NavController, NavParams, AlertController } from 'ionic-angular';
 
@@ -9,6 +10,8 @@ import {LoginProvider} from "../../providers/loginprovider";
 
 import {Credencial} from "../../model/credencial";
 
+
+
 @Component({
   selector: 'page-login',
   templateUrl: 'login.html'
@@ -17,14 +20,25 @@ export class LoginPage {
 
   credencial: Credencial;
 
+  json_file;
+
+  teste:Push;
+
   constructor(public navCtrl: NavController, public navParams: NavParams,
               public alertCtrl: AlertController, public loginProvider: LoginProvider)
               {
                 this.credencial = new Credencial();
+
+                this.json_file = {"titulo":"titulo","nome":"oi"};
+                
+                this.teste = new Push();
+      // console.log("Teste: " + this.teste);
+
               }
 
   ionViewDidLoad() {
-
+      this.teste = JSON.parse(JSON.stringify(this.json_file));
+      
       this.credencial = new Credencial();
       this.loginProvider.loginSucessoEventEmitter.subscribe(
         user =>

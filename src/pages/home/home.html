@@ -42,19 +42,19 @@
     <ion-row>
       <ion-col col-4>
         <div class="item-menu1">
-            <input (click)="abrirInfoGerais()" width="80%" type="image" src="assets/img/icone1.png">
+            <input (click)="abrirInfoGerais()" width="75%" type="image" src="assets/img/icone1.png">
             <font class="legenda">Informações</font>
         </div>
       </ion-col>
       <ion-col col-4>
         <div class="item-menu2">
-          <input  (click)="abrirPalestrantes()"width="80%" type="image" src="assets/img/icone2.png">
+          <input  (click)="abrirPalestrantes()"width="75%" type="image" src="assets/img/icone2.png">
             <font  class="legenda">Palestrantes</font>
         </div>
       </ion-col>
       <ion-col col-4>
         <div class="item-menu3">
-          <input (click)="abrirProgramacao()" width="80%" type="image" src="assets/img/icone3.png">
+          <input (click)="abrirProgramacao()" width="75%" type="image" src="assets/img/icone3.png">
             <font  class="legenda">Programação</font>
         </div>
       </ion-col>
@@ -63,19 +63,19 @@
     <ion-row>
       <ion-col width-33>
         <div class="item-menu4">
-          <input  (click)="abrirAgenda()" width="80%" type="image" src="assets/img/icone4.png">
+          <input  (click)="abrirAgenda()" width="75%" type="image" src="assets/img/icone4.png">
             <font  class="legenda">Minha agenda</font>
         </div>
       </ion-col>
       <ion-col>
         <div class="item-menu5">
-          <input onclick="window.open('http://vascular2017.com.br/inscricoes/', '_system', 'location=yes'); return false;" width="80%" type="image" src="assets/img/icone5hover.png">
+          <input onclick="window.open('http://vascular2017.com.br/inscricoes/', '_system', 'location=yes'); return false;" width="75%" type="image" src="assets/img/icone5hover.png">
             <font style="margin-left: 16%; color: #c52f33" class="legenda">Inscrição</font>
         </div>
       </ion-col>
       <ion-col>
         <div class="item-menu6">
-          <input  (click)="abrirAconteceAgora()" width="80%" type="image" src="assets/img/icone6.png">
+          <input  (click)="abrirAconteceAgora()" width="75%" type="image" src="assets/img/icone6.png">
             <font style="margin-left: -2%;" class="legenda">Acontece agora</font>
         </div>
       </ion-col>
@@ -84,23 +84,59 @@
     <ion-row>
       <ion-col>
         <div class="item-menu7">
-          <input (click)="abrirFeira()" width="80%" type="image" src="assets/img/icone7.png">
+          <input (click)="abrirFeira()" width="75%" type="image" src="assets/img/icone7.png">
           <font style="margin-left: 20%;" class="legenda">Feira</font>
         </div>
       </ion-col>
       <ion-col>
         <div class="item-menu8">
-          <input (click)="abrirTurismo()" width="80%" type="image" src="assets/img/icone8.png">
+          <input (click)="abrirTurismo()" width="75%" type="image" src="assets/img/icone8.png">
           <font style="margin-left: 15%;" class="legenda">Turismo</font>
         </div>
       </ion-col>
       <ion-col>
         <div class="item-menu9">
-          <input width="80%" type="image" (click)="abrirSobre()" src="assets/img/icone-sobre.png">
-          <font style="margin-left: 0%;" class="legenda">Sobre o congresso</font>
+          <input onclick="window.open('http://vascular2017.com.br/contato/', '_system', 'location=no'); return false;" width="75%" type="image" src="assets/img/icone-localizacao.png">
+          <font style="margin-left: -4%;" class="legenda">Contato e localização</font>
         </div>
       </ion-col>
     </ion-row>
+
+    <ion-row>
+      <ion-col>
+
+      <ion-slides class="slide-patrocinio" pager autoplay="400" loop="true" speed="3000">
+
+        <ion-slide>
+            <img class="img-propaganda" src="assets/img/logo_medtronic.png" alt="">
+        </ion-slide>
+        <ion-slide>
+            <img style="width: 50%;height: 50%;" src="assets/img/logo_cordis.png" alt="">
+        </ion-slide>
+        <ion-slide>
+            <img class="" style="width: 30%;height: 30%;" src="assets/img/logo_pfizer.png" alt="">
+        </ion-slide>
+        <ion-slide>
+            <img class="img-propaganda" src="assets/img/logo_sigvaris.png" alt="">
+        </ion-slide>
+        <ion-slide>
+            <img class="img-propaganda" src="assets/img/logo_tecmedic.png" alt="">
+        </ion-slide>
+        <ion-slide>
+            <img class="img-propaganda" src="assets/img/logo_venosan.png" alt="">
+        </ion-slide>
+        <ion-slide>
+            <img class="img-propaganda" src="assets/img/logo_biotronik.svg" alt="">
+        </ion-slide>
+        <ion-slide>
+            <img class="img-propaganda" src="assets/img/logo_terumo.png" alt="">
+        </ion-slide>
+
+    </ion-slides>
+      </ion-col>
+    </ion-row>
+
+
   </div>
 
 </div>

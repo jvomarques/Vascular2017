@@ -1,0 +1,14 @@
+<ion-content>
+      <ion-list class="list-avatar-page" *ngFor="let programacao of programacoes_por_data">
+        
+        <ion-item>
+          <h2>{{programacao.titulo}}</h2>
+          <p>{{programacao.horario}}</p>
+          <button ion-button clear item-right (click)="abrirProgramacao(this.programacao)">Ver</button>
+          <!--<ion-note item-right>{{programacao.horario}}</ion-note>-->
+        </ion-item>
+
+      </ion-list> 
+
+
+</ion-content>

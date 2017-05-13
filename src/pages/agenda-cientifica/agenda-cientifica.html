@@ -1,8 +1,8 @@
 
   <ion-content>
     
-      <ion-list class="list-avatar-page"  *ngFor="let programacao of programacoes_por_agenda">
-        
+      <!--<ion-list class="list-avatar-page"   *ngFor="let programacao of programacoes_por_agenda">
+          
         <ion-list-header>{{programacao.data}}</ion-list-header>
 
         <ion-item>
@@ -15,6 +15,13 @@
           <ion-note item-right>{{programacao.horario}}</ion-note>
         </ion-item>
 
+      </ion-list>-->
+
+      <ion-list  *ngIf="programacoes_data" [virtualScroll]="programacoes_data">
+        <ion-item class="lista" ion-item *virtualItem="let programacao_data">
+          <h2>{{programacao_data | date: 'dd/MM/yyyy'}}</h2>
+          <button ion-button clear item-right (click)="abrirProgramacaoPorData(this.programacao_data)">Ver</button>
+        </ion-item>
       </ion-list>
     
   </ion-content>

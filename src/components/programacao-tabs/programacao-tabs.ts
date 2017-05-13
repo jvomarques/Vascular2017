@@ -1,3 +1,4 @@
+import { ProgramacaoPorDataPage } from './../../pages/programacao-por-data/programacao-por-data';
 import { PalestranteProvider } from './../../providers/palestrante-provider';
 import { PalestranteProgramacaoProvider } from './../../providers/palestrante-programacao-provider';
 import { PalestranteProgramacao } from './../../model/palestrante-programacao';
@@ -27,12 +28,11 @@ import firebase from 'firebase';
   template: `
   
   <ion-content>
-    
-      <ion-list class="list-avatar-page" *ngFor="let programacao of programacoes">
+          <!-- <ion-list class="list-avatar-page" *ngFor="let programacao of programacoes">
         
         <ion-list-header>{{programacao.data}}</ion-list-header>
 
-        <ion-item (click)="abrirProgramacao(this.programacao)">
+        <ion-item>
           <ion-avatar item-left>
             <img src="{{programacao.imagem}}">
           </ion-avatar>
@@ -42,6 +42,13 @@ import firebase from 'firebase';
           <ion-note item-right>{{programacao.horario}}</ion-note>
         </ion-item>
 
+      </ion-list> -->
+
+      <ion-list  *ngIf="programacoes_data" [virtualScroll]="programacoes_data">
+        <ion-item class="lista" ion-item *virtualItem="let programacao_data">
+          <h2>{{programacao_data | date: 'dd/MM/yyyy'}}</h2>
+          <button ion-button clear item-right (click)="abrirProgramacaoPorData(this.programacao_data)">Ver</button>
+        </ion-item>
       </ion-list>
     
   </ion-content>
@@ -65,6 +72,9 @@ export class ProgramacaoTabsPage1 {
   //Vetor responsável por receber os dados da tabela 'palestrantes'
   palestrantes: Array<Palestrante>;
 
+  //Vetor responsável por receber valores da datas de programacoes
+  programacoes_data;
+
   constructor(public navCtrl: NavController, public navParams: NavParams,
               public programacaoProvider: ProgramacaoProvider, public ngZone: NgZone,
               public usuarioProvider: UsuarioProvider, public agendaProvider: AgendaProvider,
@@ -83,6 +93,8 @@ export class ProgramacaoTabsPage1 {
 
                  this.palestrates_programacoes = new Array<PalestranteProgramacao>();
                  this.palestrantes = new Array<Palestrante>();
+
+                 this.programacoes = navParams.get('programacoes');
               }
               
   inicializar() {
@@ -178,36 +190,28 @@ export class ProgramacaoTabsPage1 {
     this.programacao_cientifica = aux;
 
     /*AGRUPANDO POR DATAS*/ 
-    //console.log("Tamanho do meu Array: " + this.programacoes.length);
+    console.log("Tamanho do meu Array: " + this.programacoes.length);
 
-    // let programacoes_data_aux =[];
+    let programacoes_data_aux =[];
     
-    // for(let i = 0; i < this.programacoes.length; i++)
-    //   programacoes_data_aux[i] = this.programacoes[i].data;
+    for(let i = 0; i < this.programacoes.length; i++)
+      programacoes_data_aux[i] = this.programacoes[i].data;
     
-    // let programacoes_data = programacoes_data_aux.filter(function(este, i) {
-    //     return programacoes_data_aux.indexOf(este) == i;
-    // })
-    
-    // let programacoes_aux = this.programacoes;
-    
-    // let a = [];
+    this.programacoes_data = programacoes_data_aux.filter(function(este, i) {
+        return programacoes_data_aux.indexOf(este) == i;
+    })
 
-    // for(let i = 0; i < programacoes_aux.length; i++)
-    // {
-    //   a = [];
-      
-    //   for(let j = 0; j < this.programacoes.length; j++)
-    //     if(this.programacoes[j].data == programacoes_aux[i].data)
-    //       a.push(programacoes_aux[j]);
-
-    //   this.removeItem(programacoes_aux, programacoes_aux[i]);
-    //   this.programacao_por_data.push(a);
-    // }
-
-    //for(let i = 0; i < this.programacao_por_data.length; i++)
-      //console.log(this.programacao_por_data[i]);
+    for(let i = 0; i < this.programacoes_data.length; i++)
+      console.log(this.programacoes_data[i]);
   
+  }
+
+  abrirProgramacaoPorData(data){
+    this.navCtrl.push(ProgramacaoPorDataPage, {
+      data: data, usuarios: this.usuarios, agendas: this.agendas, programacoes: this.programacoes,
+        programacoes_agenda: this.programacoes_agenda, palestrates_programacoes: this.palestrates_programacoes,
+        palestrantes: this.palestrantes
+    });
   }
 
   abrirProgramacao(info){
@@ -227,8 +231,7 @@ export class ProgramacaoTabsPage1 {
   template: `
   
   <ion-content>
-    
-      <ion-list class="list-avatar-page" *ngFor="let programacao of programacoes">
+        <!--<ion-list class="list-avatar-page" *ngFor="let programacao of programacoes">
         
         <ion-list-header>{{programacao.data}}</ion-list-header>
 
@@ -242,6 +245,13 @@ export class ProgramacaoTabsPage1 {
           <ion-note item-right>{{programacao.horario}}</ion-note>
         </ion-item>
 
+      </ion-list>-->
+
+      <ion-list [virtualScroll]="programacoes_data">
+        <ion-item class="lista" ion-item *virtualItem="let programacao_data">
+          <h2>{{programacao_data | date: 'dd/MM/yyyy'}}</h2>
+          <button ion-button clear item-right (click)="abrirProgramacaoPorData(this.programacao_data)">Ver</button>
+        </ion-item>
       </ion-list>
     
   </ion-content>
@@ -259,11 +269,14 @@ export class ProgramacaoTabsPage2 {
   programacoes:Array<Programacao>;
   programacoes_agenda:Array<ProgramacaoAgenda>;
 
- //Vetor responsável por receber os dados da tabela palestrante-programacao
+  //Vetor responsável por receber os dados da tabela palestrante-programacao
   palestrates_programacoes: Array<PalestranteProgramacao>;
-
+    
   //Vetor responsável por receber os dados da tabela 'palestrantes'
   palestrantes: Array<Palestrante>;
+
+  //Vetor responsável por receber valores da datas de programacoes
+  programacoes_data;
 
   constructor(public navCtrl: NavController, public navParams: NavParams,
               public programacaoProvider: ProgramacaoProvider, public ngZone: NgZone,
@@ -283,10 +296,25 @@ export class ProgramacaoTabsPage2 {
 
                  this.palestrates_programacoes = new Array<PalestranteProgramacao>();
                  this.palestrantes = new Array<Palestrante>();
+
+                 this.programacoes = navParams.get('programacoes_sociais');
               }
+              
+  inicializar() {
+
+  }
+
+  removeItem(array, item){
+      for(var i in array){
+          if(array[i]==item){
+              array.splice(i,1);
+              break;
+          }
+      }
+  }
 
   ionViewDidLoad() {
-
+      
       this.programacaoProvider.referencia.on('value', (snapshot) => {
       this.ngZone.run( () => {
             let innerArray = new Array();
@@ -357,12 +385,39 @@ export class ProgramacaoTabsPage2 {
       })
     })
 
-    let aux = new Array();
+    let aux = new Array<Programacao>();
     for(let i = 0; i < this.programacoes.length; i++)
       if(this.programacoes[i].tipo == "Social")
         aux.push(this.programacoes[i]);
 
     this.programacao_social = aux;
+
+    for(let i = 0; i < this.programacao_social.length; i++)
+      console.log(this.programacao_social[i].titulo);
+
+    /*AGRUPANDO POR DATAS*/ 
+    console.log("Tamanho do meu Array Social: " + this.programacoes.length);
+
+    let programacoes_data_aux =[];
+    
+    for(let i = 0; i < this.programacoes.length; i++)
+      programacoes_data_aux[i] = this.programacao_social[i].data;
+    
+    this.programacoes_data = programacoes_data_aux.filter(function(este, i) {
+        return programacoes_data_aux.indexOf(este) == i;
+    })
+
+    for(let i = 0; i < this.programacoes_data.length; i++)
+      console.log(this.programacoes_data[i]);
+  
+  }
+
+  abrirProgramacaoPorData(data){
+    this.navCtrl.push(ProgramacaoPorDataPage, {
+      data: data, usuarios: this.usuarios, agendas: this.agendas, programacoes: this.programacoes,
+        programacoes_agenda: this.programacoes_agenda, palestrates_programacoes: this.palestrates_programacoes,
+        palestrantes: this.palestrantes
+    });
   }
 
   abrirProgramacao(info){
@@ -381,8 +436,7 @@ export class ProgramacaoTabsPage2 {
   template: `
   
   <ion-content>
-    
-      <ion-list class="list-avatar-page" *ngFor="let programacao of programacoes">
+       <ion-list class="list-avatar-page" *ngFor="let programacao of programacoes">
         
         <ion-list-header>{{programacao.data}}</ion-list-header>
 
@@ -396,7 +450,14 @@ export class ProgramacaoTabsPage2 {
           <ion-note item-right>{{programacao.horario}}</ion-note>
         </ion-item>
 
-      </ion-list>
+      </ion-list> 
+
+      <!-- <ion-list [virtualScroll]="programacoes_data">
+        <ion-item class="lista" ion-item *virtualItem="let programacao_data">
+          <h2>{{programacao_data | date: 'dd/MM/yyyy'}}</h2>
+          <button ion-button clear item-right (click)="abrirProgramacaoPorData(this.programacao_data)">Ver</button>
+        </ion-item>
+      </ion-list> -->
     
   </ion-content>
   `
@@ -413,12 +474,14 @@ export class ProgramacaoTabsPage3 {
   programacoes:Array<Programacao>;
   programacoes_agenda:Array<ProgramacaoAgenda>;
 
- //Vetor responsável por receber os dados da tabela palestrante-programacao
+  //Vetor responsável por receber os dados da tabela palestrante-programacao
   palestrates_programacoes: Array<PalestranteProgramacao>;
-  
+    
   //Vetor responsável por receber os dados da tabela 'palestrantes'
   palestrantes: Array<Palestrante>;
 
+  //Vetor responsável por receber valores da datas de programacoes
+  programacoes_data;
 
   constructor(public navCtrl: NavController, public navParams: NavParams,
               public programacaoProvider: ProgramacaoProvider, public ngZone: NgZone,
@@ -438,6 +501,8 @@ export class ProgramacaoTabsPage3 {
 
                  this.palestrates_programacoes = new Array<PalestranteProgramacao>();
                  this.palestrantes = new Array<Palestrante>();
+
+                 this.programacoes = navParams.get('programacoes');
               }
 
 
@@ -519,6 +584,14 @@ export class ProgramacaoTabsPage3 {
         aux.push(this.programacoes[i]);
 
     this.programacao_comissoes = aux;
+  }
+
+  abrirProgramacaoPorData(data){
+    this.navCtrl.push(ProgramacaoPorDataPage, {
+      data: data, usuarios: this.usuarios, agendas: this.agendas, programacoes: this.programacoes,
+        programacoes_agenda: this.programacoes_agenda, palestrates_programacoes: this.palestrates_programacoes,
+        palestrantes: this.palestrantes
+    });
   }
 
   abrirProgramacao(info){

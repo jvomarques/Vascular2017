@@ -27127,6 +27127,12 @@ page-home .home {
   background-size: cover;
 }
 
+page-home .img-propaganda {
+  margin-top: -1%;
+  width: 65%;
+  height: 65%;
+}
+
 page-home .borda {
   border: 2px solid #fff;
   border-radius: 15px;
@@ -27144,9 +27150,13 @@ page-home .bt-home {
   margin-left: 20%;
 }
 
+page-home .slide-patrocinio {
+  margin-top: -1%;
+}
+
 page-home .img_logo {
-  margin-bottom: 10%;
-  margin-top: 5%;
+  margin-bottom: 3%;
+  margin-top: 0%;
   margin-left: 15%;
   width: 70%;
   height: 70%;
@@ -27261,6 +27271,19 @@ page-perfil-usuario .usuario-icone {
   width: 40%;
   margin-top: 19%;
   margin-left: 28%;
+}
+
+page-perfil-usuario .lista-borda {
+  border: 0px solid #fff;
+  border-radius: 5px;
+}
+
+page-perfil-usuario .img_logo {
+  margin-bottom: 10%;
+  margin-top: 5%;
+  margin-left: 15%;
+  width: 70%;
+  height: 70%;
 }
 
 page-perfil-usuario .usuario-icone-background {

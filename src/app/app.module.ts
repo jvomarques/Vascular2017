@@ -1,3 +1,5 @@
+import { ProgramacaoPorDataPage } from './../pages/programacao-por-data/programacao-por-data';
+import { PaginaNotificacoesPage } from './../pages/pagina-notificacoes/pagina-notificacoes';
 import { PalestranteDescricaoWithNavBarPage } from './../pages/palestrante-descricao-with-nav-bar/palestrante-descricao-with-nav-bar';
 import { SobreAppPage } from './../pages/sobre-app/sobre-app';
 import { SobrePage } from './../pages/sobre/sobre';
@@ -30,8 +32,8 @@ import { UsuarioEditarPage } from './../pages/usuario-editar/usuario-editar';
 import { UsuarioProvider } from './../providers/usuario-provider';
 import { PerfilUsuarioPage } from './../pages/perfil-usuario/perfil-usuario';
 import { InformacaoCompletaPage } from './../pages/informacao-completa/informacao-completa';
-import { NgModule, ErrorHandler } from '@angular/core';
-import { IonicApp, IonicModule, IonicErrorHandler, Platform } from 'ionic-angular';
+import { NgModule, ErrorHandler, ViewChild } from '@angular/core';
+import { IonicApp, IonicModule, IonicErrorHandler, Platform, NavController } from 'ionic-angular';
 
 import { MyApp } from './app.component';
 import { HomePage } from '../pages/home/home';
@@ -53,15 +55,25 @@ import {OneSignal} from '@ionic-native/onesignal';
 
 import { CloudSettings, CloudModule } from '@ionic/cloud-angular';
 
+import { InAppBrowser} from 'ionic-native';
 
 /*Importando configurações do projeto firebase*/
-const firebaseConfig = {
-  apiKey: "AIzaSyDPwwJcjnGmLZpLA3d17dpl1xYFLrOGH2E",
-  authDomain: "event-b66ef.firebaseapp.com",
-  databaseURL: "https://event-b66ef.firebaseio.com",
-  storageBucket: "event-b66ef.appspot.com",
-  messagingSenderId: "757000610628"
-};
+// const firebaseConfig = {
+//   apiKey: "AIzaSyDPwwJcjnGmLZpLA3d17dpl1xYFLrOGH2E",
+//   authDomain: "event-b66ef.firebaseapp.com",
+//   databaseURL: "https://event-b66ef.firebaseio.com",
+//   storageBucket: "event-b66ef.appspot.com",
+//   messagingSenderId: "757000610628"
+// };
+
+let firebaseConfig = {
+    apiKey: "AIzaSyBSi2osj5XPOI4KsGTa13sKfgr6OkEWQBo",
+    authDomain: "vascular-2017.firebaseapp.com",
+    databaseURL: "https://vascular-2017.firebaseio.com",
+    projectId: "vascular-2017",
+    storageBucket: "vascular-2017.appspot.com",
+    messagingSenderId: "536954348713"
+  };
 
 
 
@@ -98,7 +110,9 @@ const firebaseConfig = {
     ProgramacaoCompletaWithNavBarPage,
     SobrePage,
     SobreAppPage,
-    PalestranteDescricaoWithNavBarPage
+    PalestranteDescricaoWithNavBarPage,
+    PaginaNotificacoesPage,
+    ProgramacaoPorDataPage
   ],
   imports: [
     IonicModule.forRoot(MyApp, {tabsPlacemant:"top"})
@@ -136,7 +150,9 @@ const firebaseConfig = {
     ProgramacaoCompletaWithNavBarPage,
     SobrePage,
     SobreAppPage,
-    PalestranteDescricaoWithNavBarPage
+    PalestranteDescricaoWithNavBarPage,
+    PaginaNotificacoesPage,
+    ProgramacaoPorDataPage
   ],
   providers: [
     {provide: ErrorHandler, useClass: IonicErrorHandler},
@@ -152,14 +168,18 @@ const firebaseConfig = {
     TurismoProvider,
     FeiraProvider,
     AconteceAgoraProvider,
-    PalestranteProgramacaoProvider
+    PalestranteProgramacaoProvider,
+    // InAppBrowser
   ]
 })
 export class AppModule {
 
-  
+  @ViewChild(NavController) nav: NavController;
+  rootPage:any;
 
-  constructor(private _OneSignal: OneSignal, private _platform: Platform){
+  constructor(private _OneSignal: OneSignal, private _platform: Platform,
+              ) {
+
     /*Inicializando firebase no construtor do meu AppModule*/
     firebase.initializeApp(firebaseConfig);
     this.initializeApp();
@@ -168,16 +188,16 @@ export class AppModule {
     
     initializeApp() {
     this._platform.ready().then(() => {
-      this._OneSignal.startInit("76676dc5-7ed7-403c-bd31-f0bc148e6505", "757000610628");
-      this._OneSignal.inFocusDisplaying(this._OneSignal.OSInFocusDisplayOption.Notification);
-      this._OneSignal.setSubscription(true);
-      this._OneSignal.handleNotificationReceived().subscribe(() => {
-        // handle received here how you wish.
-      });
-      this._OneSignal.handleNotificationOpened().subscribe(() => {
-        // handle opened here how you wish.
-      });
-      this._OneSignal.endInit();        
+      // this._OneSignal.startInit("24bc7f28-86ab-4ecb-9f5c-fa0064f4e09b", "536954348713");
+      // this._OneSignal.inFocusDisplaying(this._OneSignal.OSInFocusDisplayOption.Notification);
+      // this._OneSignal.setSubscription(true);
+      // this._OneSignal.handleNotificationReceived().subscribe(() => {
+      //   // handle received here how you wish.
+      // });
+      // this._OneSignal.handleNotificationOpened().subscribe(data => {
+      //   this.nav.push(PaginaNotificacoesPage, {data: data});
+      // });
+      // this._OneSignal.endInit();        
     })    
   }
 }
